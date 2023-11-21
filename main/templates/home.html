@@ -18,30 +18,32 @@
         <div class="container" id="container">
             <div class="form-container sign-up">
 
-                {#<form action={% url 'main' %} method ="POST">#}
-                <form method="post" action="{% url 'adicionar_aluno' %}">
+                <form action="{% url 'registro' %}" method="POST">
                     {% csrf_token %}
-                    {{ form.as_p }}
 
-                        <h1>Create Account</h1>
-                        <div class="social-icons">
-                            <a href="#" class="icon"><i class="fa-brands fa-google- -g"></i></a>
-                            <a href="#" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
-                            <a href="#" class="icon"><i class="fa-brands fa-github"></i></a>
-                            <a href="#" class="icon"><i class="fa-brands fa-linkedin-in"></i></a>
-                        </div>
+                    <h1>Create Account</h1>~
 
-                    <span>or use your email for registeration</span>
-                    <input type="text" id="username" name="username" placeholder="Name">
+                    <div class="social-icons">
+                        <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
+                        <a href="#" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#" class="icon"><i class="fa-brands fa-github"></i></a>
+                        <a href="#" class="icon"><i class="fa-brands fa-linkedin-in"></i></a>
+                    </div>
+                    
+                    <span>or use your email for registration</span>
+                    <input type="nome" id="nome" name="nome" placeholder="Name">
                     <input type="email" id="email" name="email" placeholder="Email">
-                    <input type="password" id="password" name="password" placeholder="Password">
-                    <button type="submit" Sign Up </button> 
-                </form>
+                    <input type="senha" id="senha" name="senha" placeholder="Password">
 
+                    <button type="submit">Sign Up</button>
+                </form>
             </div>
+
+        
             <div class="form-container sign-in">
-                <form action="{% url 'main' %}" method ="POST">
+                <form action="{% url 'main' %}" method="POST">
                     {% csrf_token %}
+
                     <h1>Sign In</h1>
                     <div class="social-icons">
                         <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
@@ -50,12 +52,14 @@
                         <a href="#" class="icon"><i class="fa-brands fa-linkedin-in"></i></a>
                     </div>
                     <span>or use your email password</span>
-                    <input type="email" placeholder="Email">
-                    <input type="password" placeholder="Password">
+                    <input type="text" name="nome" placeholder="Name">  
+                    <input type="password" name="senha" placeholder="Password">  
                     <a href="#">Forget Your Password?</a>
-                    <button>Sign-In </button>
+
+                    <button type="submit">Sign-In </button>
                 </form>
             </div>
+
             <div class="toggle-container">
                 <div class="toggle">
                     <div class="toggle-panel toggle-left">
@@ -71,6 +75,5 @@
                 </div>
             </div>
         </div>
-    <script src="{% static 'js/home.js'%}"></script>    
 </body>
 </html>

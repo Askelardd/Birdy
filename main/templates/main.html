@@ -1,5 +1,6 @@
 {% load static %}
-<!DOCTYPE html>
+
+{% if user.is_authenticated %}
 <html lang="en">
     <head>
         <meta charset="UTF-8">
@@ -57,7 +58,10 @@
     </div>
 </div>  
 </body>
+</html> 
 
-<script src="{% static 'js/home.js' %}"></script>
+{% else %}
+    <a href="{% url 'login' %}">Login</a>
+{% endif %}
 
-</html>
+<!DOCTYPE html>

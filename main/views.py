@@ -1,8 +1,8 @@
 from django.shortcuts import redirect, render
-from django.http import HttpResponse
-from django.contrib.auth.models import User
-from django.contrib import messages
-from main.forms import alunoForm
+from django.shortcuts import get_object_or_404, render
+from main.models import aluno
+from .forms import RegistarAluno
+
 
 def home(request): #ligações as paginas web
     return render (request, 'home.html')
@@ -13,15 +13,24 @@ def main(request):
 def licoes(request):
     return render (request, 'licoes.html')
 
-#declaração do login
-def adicionar_aluno(request):
+def editar_aluno(request, aluno_id):
+    
+    
+    aluno_obj = get_object_or_404(aluno, id_aluno=aluno_id)
+
+    # Lógica de edição aqui, se necessário
+
+    return render(request, 'editar_aluno.html', {'aluno_obj': aluno_obj})
+
+def registro_view(request):
     if request.method == 'POST':
-        form = alunoForm(request.POST)
+        form = RegistarAluno(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('página_sucesso')  # redirecionar para uma página de sucesso
+            return redirect('home')  # Substitua 'main' pelo nome da sua view principal após o registro.
+            print(f"Novo usuário registrado: Nome={form.cleaned_data['nome']}, Email={form.cleaned_data['email']}, Senha={form.cleaned_data['senha']}")
     else:
-        form = alunoForm()
+        form = RegistarAluno()
 
-    return render(request, 'main/home.html', {'form': form})
-        
+    return render(request, 'home.html', {'form': form})
+
