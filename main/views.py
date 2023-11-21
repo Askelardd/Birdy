@@ -3,6 +3,8 @@ from django.shortcuts import get_object_or_404, render
 from main.models import aluno
 from .forms import RegistarAluno
 
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import authenticate, login
 
 def home(request): #ligações as paginas web
     return render (request, 'home.html')
@@ -33,4 +35,23 @@ def registro_view(request):
         form = RegistarAluno()
 
     return render(request, 'home.html', {'form': form})
+
+def login_view(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            nome = form.cleaned_data['nome']
+            senha = form.cleaned_data['senha']
+            aluno = authenticate(request, username=nome, password=senha)
+
+            if aluno is not None:
+                login(request, aluno)
+                return redirect('main')  # Substitua 'main' pelo nome da sua view principal após o login
+            else:
+                # Adicione uma mensagem de erro se o login falhar
+                form.add_error(None, 'Invalid login credentials.')
+    else:
+        form = AuthenticationForm()
+
+    return render(request, 'login.html', {'form': form})
 
