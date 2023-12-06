@@ -12,8 +12,9 @@
 </head>
 
 <body>
-    <h2>Login</h2>
     
+    <h2>Login</h2>
+
     {% if messages %}
         <ul class="messages">
             {% for message in messages %}
@@ -22,7 +23,7 @@
         </ul>
     {% endif %}
 
-    <form method="post" action="{% url 'login' %}">
+    <form method="POST" action="{% url 'login' %}">
         {% csrf_token %}
         <label for="id_username">Nome de usuário:</label>
         <input type="text" name="username" id="id_username" >

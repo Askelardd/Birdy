@@ -1,5 +1,6 @@
 {% load static %}
 
+<!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8">
@@ -46,7 +47,7 @@
         </ul>
     {% endif %} 
     <div class="row">
-        <div class="col-lg-5 col-sm-5 p-5">
+        <div class="col-lg-6 col-sm-5 p-5">
         
             <img src="{% static 'assets/Birdy.png' %}" class="img-fluid" id="min" >
 
@@ -60,8 +61,12 @@
             
             <a href={% url 'login' %}><button class="button"> Fazer Login </button></a>
             <button class="button-more">Saber mais</button>
-            
         </div>
+
+        <form method="POST" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit">Logout</button>
+        </form>
     </div>
 </div>  
 </body>

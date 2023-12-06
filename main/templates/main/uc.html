@@ -1,0 +1,52 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{% static 'assets/Passaro_Birdy.png' %}" type="image/x-icon">    
+    <link rel="stylesheet" href="{% static "css/uc.css" %}">
+    <title>Birdy!</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+ 
+</head>
+<body>
+
+   <header class="header">
+        <img src={% static "assets/logo.png" %} class="logo"></img>
+        <nav class="header-navigation">
+            <ul class="nav-links">
+                <li><a href="#">Cursos</a></li>
+                <li><a href="#">Fórum</a></li>
+                <li><a href="#">Contato</a></li>
+            </ul>
+        </nav>
+        <form method="POST" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <a type="submit" class="logout"><button>Logout</button></a>
+        </form>
+            
+    </header>
+
+    <div class="container mt-4pb-3 ">
+        <div class="row ">
+            <div class="cont1 col-6 p-5 ">
+                <img src="{% static 'assets/Birdy_Mat.png' %}" class="birdy-curso ms-5">
+                <h1 class="math"> Aprenda <p>Matemática!</p></h1>
+                <button class="math-button ms-5"> COMECE JÁ</button>
+            </div>
+    
+            <div class="cont2 col-6 p-5"> 
+                <div class="image">
+                    <img src= {% static "assets/Birdy_Prog.png" %} class="birdy-curso ms-5">
+                    <h1 class="prog"> Aprenda <p>Programação!</p></h1>
+                    <button class="prog-button ms-5"> COMECE JÁ</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>
