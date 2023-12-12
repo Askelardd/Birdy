@@ -112,7 +112,6 @@ header a:hover{
 }
 
 .wrapper{
-    display: flex;
     margin: 40px;
 }
 
@@ -120,58 +119,111 @@ header a:hover{
     background-color: #ffffff;
     border-radius: 30px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 30%);
-    width: 500px;
+    width: 700px;
     margin: 40px;
+    padding: 30px;
+}
+
+.profile-header{
     display: flex;
-    flex-direction: column;
-    align-items: center;
 }
 
-.birdy-curso{
-    width: 300px;
-    height: 300px;
+.user-img{
+    width: 20%;
+    height: 20%;
+    padding-left: 20px;
+    padding-top: 30px;
 }
 
-.math{
+.user-name{
+    font-weight: 700;
+    display: flex;
     color: #f84a4a;
 }
 
-.math-button{
-    background-color: #f84a4a;
-    margin-bottom: 40px;
-    border-radius: 20px;
-    border: none;
-    padding: 16px 20px;
-    font-size: 25px;
-    color: white;
-    font-weight: 700;
-    transition: all 0.4s ease 0s;
+.user-email{
+    font-weight: 200;
+    color: #f84a4a;
+    display: flex;
+
 }
 
-.math-button:hover{
-    border-radius: 40px;
-    transition: all 0.4s ease 0s;
-    background-color: #D63737;
+.math{
+    font-weight: 700;
+    color: #f84a4a;
+    font-size: 30px;
+    margin-left: 20px;
 }
 
 .prog{
-    color: #2B2B2B;
-}
-
-.prog-button{
-    background-color: #2B2B2B;
-    margin-bottom: 20px;
-    border-radius: 20px;
-    border: none;
-    padding: 16px 20px;
-    font-size: 25px;
-    color: white;
     font-weight: 700;
-    transition: all 0.4s ease 0s;
+    color: #2B2B2B;
+    font-weight: 30px;
+    margin-left: 20px;
 }
 
-.prog-button:hover{
-    border-radius: 40px;
-    transition: all 0.4s ease 0s;
-    background-color:#000000;
+#skills{
+    font-size: 20px;
+    margin: 45px auto;
+    overflow: hidden;
 }
+
+.math-progress-bar{
+    width: 90%;
+    height: 35px;
+    position: relative;
+    background:#f99393;
+    margin: 20px auto;
+    border-radius: 8px;
+    
+}
+
+.prog-progress-bar{
+    width: 90%;
+    height: 35px;
+    position: relative;
+    background:#989898;
+    margin: 20px auto;
+    border-radius: 8px;
+    
+}
+
+.progess{
+    z-index: 3;
+    position: relative;
+    margin-right: 10px;
+    margin-top: 3px;
+    float: right;
+    text-shadow: none;
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: 700;
+    display: flex;
+}
+
+#math{
+    width: 65%;
+    animation: animate-html 3s;
+    height: 35px;
+    position: relative;
+    border-radius: 8px;
+    background-color: #f84a4a;
+}
+
+#prog{
+    width: 15%;
+    animation: animate-html 3s;
+    height: 35px;
+    position: relative;
+    border-radius: 8px;
+    background-color: #2B2B2B;
+}
+@keyframes animate-css {
+    from{width: 0px;}
+    to{width: 65%;}
+}
+
+
+
+
+

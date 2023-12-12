@@ -13,7 +13,6 @@ body{
     background: linear-gradient(to right,#f6d2d2,  #f99393);
     display: flex;
     align-items: center;
-    /*justify-content: center;*/
     flex-direction: column;
     height: 100vh;
 }
@@ -55,13 +54,19 @@ li,a, button{
     color:#f99393;
 }
 
-button{
+.logout{
     padding: 9px 25px;
     cursor: pointer;
     background-color:#f84a4a;
     color: #ffffff;
     border: none;
     border-radius: 40px;
+    transition: all 0.4s ease 0s;
+}
+
+.logout:hover{
+    background-color: #D63737;
+    transition: all 0.4s ease 0s;
 }
 
 h1{
@@ -116,6 +121,11 @@ header a:hover{
 .nome-curso{
     font-weight: 700;
     color: #f84a4a;
+}
+
+content{
+    display: flex;
+    flex-direction: column;
 }
 
 .container{
