@@ -14,7 +14,7 @@
             <title>Birdy!</title>
     </head>
 
-
+<body>
     <header class="mt-4" id="all">
         <nav>
             <div class="homebar">
@@ -60,7 +60,7 @@
             <p class="card-text">As praias de Fão são muito lindas e é isso que tem pra falar, nunca nem fui lá pra ser sincero, deve ser bem praia. </p>
             
             <a href={% url 'login' %}><button class="button"> Fazer Login </button></a>
-            <button class="button-more">Saber mais</button>
+            <a href="{% url 'register' %}"><button class="button-more">Fazer Registro</button></a>
         </div>
 
         <form method="POST" action="{% url 'logout' %}">

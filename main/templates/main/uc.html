@@ -30,19 +30,21 @@
             
     </header>
 
-    <div class="container mt-4pb-3 ">
+    <div class="container mt-4 pb-3 ">
         <div class="row ">
             <div class="cont1 col-6 p-5 ">
                 <img src="{% static 'assets/Birdy_Mat.png' %}" class="birdy-curso ms-5">
                 <h1 class="math"> Aprenda <p>Matemática!</p></h1>
-                <button class="math-button ms-5"> COMECE JÁ</button>
+                <button class="math-button ms-5"><a href="{% url 'cursos' %}" style="color: white; text-decoration: none;">COMECE JÁ</a></button>
+
             </div>
     
             <div class="cont2 col-6 p-5"> 
                 <div class="image">
                     <img src= {% static "assets/Birdy_Prog.png" %} class="birdy-curso ms-5">
                     <h1 class="prog"> Aprenda <p>Programação!</p></h1>
-                    <button class="prog-button ms-5"> COMECE JÁ</button>
+                    <button class="prog-button ms-5">COMECE JÁ</button>
+                    
                 </div>
             </div>
         </div>

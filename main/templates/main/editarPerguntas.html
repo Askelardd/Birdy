@@ -1,0 +1,36 @@
+<!-- seuapp/templates/main/editar_pergunta.html -->
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Pergunta</title>
+</head>
+<body>
+    <h1>Editar Pergunta</h1>
+    <form method="POST" action="">
+        {% csrf_token %}
+        <label for="pergunta_texto">Pergunta:</label>
+        <input type="text" name="pergunta_texto" value="{{ pergunta.pergunta_texto }}" required><br>
+
+        <label for="resposta1">Resposta 1:</label>
+        <input type="text" name="resposta1" value="{{ pergunta.resposta1 }}" required><br>
+
+        <label for="resposta2">Resposta 2:</label>
+        <input type="text" name="resposta2" value="{{ pergunta.resposta2 }}" required><br>
+
+        <label for="resposta3">Resposta 3:</label>
+        <input type="text" name="resposta3" value="{{ pergunta.resposta3 }}" required><br>
+
+        <label for="resposta4">Resposta 4:</label>
+        <input type="text" name="resposta4" value="{{ pergunta.resposta4 }}" required><br>
+
+        <label for="respostacerta">Resposta Certa:</label>
+        <input type="text" name="respostacerta" value="{{ pergunta.respostacerta }}" required><br>
+
+        <button type="submit">Salvar Edição</button>
+    </form>
+</body>
+</html>
