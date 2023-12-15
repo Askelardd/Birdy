@@ -1,0 +1,229 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Ubuntu:wght@300;400;500;700&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+   font -family: 'Montserrat',  sans-serif;
+
+}
+
+body{
+    background-color: #f84a4a;
+    background: linear-gradient(to right,#f6d2d2,  #f99393);
+    display: flex;
+    align-items: center;
+    /*justify-content: center;*/
+    flex-direction: column;
+    height: 100vh;
+}
+
+li,a, button{
+    font-family: "Montserrat", sans-serif;
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 25px;
+    color: #f84a4a;
+}
+
+
+.logo{
+    cursor: pointer;
+    /* max-width: 85%;
+    max-height: 85%; */
+    width: 15%;
+}
+
+.nav-links{
+    list-style: none;
+}
+
+.nav-links li{
+    display: inline-block;
+}
+
+.nav-links li a{
+    transition: all 0.3 ease 0s;
+}
+
+.nav-links li a:hover{
+    transition: all 0.4s ease 0s;
+    color:#f99393;
+}
+
+h1{
+    font-weight: 700;
+    text-align: center;
+    color: #f84a4a;
+}
+
+p{
+    font-weight: 700;
+    color: #f84a4a;
+}
+
+.Logout{
+    padding: 9px 25px;
+    cursor: pointer;
+    background-color:#f84a4a;
+    color: #ffffff;
+    border: none;
+    border-radius: 40px;
+    transition: all 0.4s ease 0s;
+}
+
+.Logout:hover{
+    background-color: #D63737;
+    transition: all 0.4s ease 0s;
+}
+
+
+.header{
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 20%;
+    padding: 0px 10%;
+    background-color: #ffffff;
+}
+
+.header-navigation a{
+    text-decoration: none;
+    width: 50%;
+    display: flex;
+    justify-content: space-evenly;
+    font-weight: bold;
+    padding-inline: 50px;
+    font-size: 30px;
+    color: #f84a4a;
+}
+
+header a:hover{
+    transition: all 0.4s ease 0s;
+    color: #f99393;
+}
+.header-img{
+    max-width: 40%;
+    max-height: 40%;
+    display: flex;
+    align-items: center;
+    padding: -1;
+}
+
+.wrapper{
+    margin: 40px;
+}
+
+.content{
+    background-color: #ffffff;
+    border-radius: 30px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 30%);
+    width: 700px;
+    margin: 40px;
+    padding: 30px;
+}
+
+.profile-header{
+    display: flex;
+}
+
+.user-img{
+    width: 20%;
+    height: 20%;
+    padding-left: 20px;
+    padding-top: 30px;
+}
+
+.user-name{
+    font-weight: 700;
+    display: flex;
+    color: #f84a4a;
+}
+
+.user-email{
+    font-weight: 200;
+    color: #f84a4a;
+    display: flex;
+
+}
+
+.math{
+    font-weight: 700;
+    color: #f84a4a;
+    font-size: 30px;
+    margin-left: 20px;
+}
+
+.prog{
+    font-weight: 700;
+    color: #2B2B2B;
+    font-weight: 30px;
+    margin-left: 20px;
+}
+
+#skills{
+    font-size: 20px;
+    margin: 45px auto;
+    overflow: hidden;
+}
+
+.math-progress-bar{
+    width: 90%;
+    height: 35px;
+    position: relative;
+    background:#f99393;
+    margin: 20px auto;
+    border-radius: 8px;
+    
+}
+
+.prog-progress-bar{
+    width: 90%;
+    height: 35px;
+    position: relative;
+    background:#989898;
+    margin: 20px auto;
+    border-radius: 8px;
+    
+}
+
+.progess{
+    z-index: 3;
+    position: relative;
+    margin-right: 10px;
+    margin-top: 3px;
+    float: right;
+    text-shadow: none;
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: 700;
+    display: flex;
+}
+
+#math{
+    width: 65%;
+    animation: animate-html 3s;
+    height: 35px;
+    position: relative;
+    border-radius: 8px;
+    background-color: #f84a4a;
+}
+
+#prog{
+    width: 15%;
+    animation: animate-html 3s;
+    height: 35px;
+    position: relative;
+    border-radius: 8px;
+    background-color: #2B2B2B;
+}
+@keyframes animate-css {
+    from{width: 0px;}
+    to{width: 65%;}
+}
+
+
+
+
+
