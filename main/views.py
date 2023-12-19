@@ -1,3 +1,4 @@
+import os
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth import authenticate, login
@@ -6,7 +7,8 @@ from django.urls import reverse
 from main.models import Pergunta
 from .forms import LoginForm, RegistrationForm
 from django.contrib.auth import logout
-
+from django.conf import settings
+from django.utils.crypto import get_random_string
 
  # renderizacao das paginas
  
@@ -96,42 +98,97 @@ def verificar_resposta(request, pergunta_id):
         pontos = request.session.get('pontos', 0)
         pontos += 1
         request.session['pontos'] = pontos
+        print(pontos)
+        resposta = f"{mensagem} Pontos: {pontos}"
     else:
-        mensagem = "Resposta errada."
+        resposta = "Resposta errada."
+        
+        request.session.clear()
+    return HttpResponse(resposta) 
 
-    return HttpResponse(mensagem)
+# def criar_form_perg(request):
+        
+#     if request.method == 'POST':
+#         pergunta_texto = request.POST.get('Pergunta')
+#         imagem = request.FILES.get('Imagem')
+#         resposta1 = request.POST.get('Resposta1')
+#         resposta2 = request.POST.get('Resposta2')
+#         resposta3 = request.POST.get('Resposta3')
+#         resposta4 = request.POST.get('Resposta4')
+#         respostacerta = request.POST.get('RespostaCorreta')
+#         solucao = request.FILES.get('Solucao')
+#         nova_pergunta = Pergunta.objects.create(
+#             pergunta_texto=pergunta_texto,
+#             imagem = imagem,
+#             resposta1=resposta1,
+#             resposta2=resposta2,
+#             resposta3=resposta3,
+#             resposta4=resposta4,
+#             respostacerta=respostacerta,
+#             solucao = solucao
+#         )
+#         nova_pergunta.save()
+#         return HttpResponseRedirect(reverse('crudPerguntas'))
 
 def criar_form_perg(request):
-        
     if request.method == 'POST':
         pergunta_texto = request.POST.get('Pergunta')
+        imagem = request.FILES.get('Imagem')
         resposta1 = request.POST.get('Resposta1')
         resposta2 = request.POST.get('Resposta2')
         resposta3 = request.POST.get('Resposta3')
         resposta4 = request.POST.get('Resposta4')
         respostacerta = request.POST.get('RespostaCorreta')
+        solucao = request.FILES.get('Solucao')
+
+        # Gere um nome de arquivo único para as imagens
+        imagem_nome = f"imagem_{get_random_string(6)}.png"
+        solucao_nome = f"solucao_{get_random_string(6)}.png"
+
+        # Caminhos completos dos arquivos
+        imagem_path = os.path.join(settings.MEDIA_ROOT, 'assets', imagem_nome)
+        solucao_path = os.path.join(settings.MEDIA_ROOT, 'assets', solucao_nome)
+
+        # Salve os arquivos no sistema de arquivos
+        with open(imagem_path, 'wb') as imagem_file:
+            for chunk in imagem.chunks():
+                imagem_file.write(chunk)
+
+        with open(solucao_path, 'wb') as solucao_file:
+            for chunk in solucao.chunks():
+                solucao_file.write(chunk)
+
+        # Crie os URLs completos para os arquivos
+        imagem_url = os.path.join('assets', imagem_nome)
+        solucao_url = os.path.join('assets', solucao_nome)
 
         nova_pergunta = Pergunta.objects.create(
             pergunta_texto=pergunta_texto,
+            imagem=imagem_url,
             resposta1=resposta1,
             resposta2=resposta2,
             resposta3=resposta3,
             resposta4=resposta4,
-            respostacerta=respostacerta
+            respostacerta=respostacerta,
+            solucao=solucao_url
         )
         nova_pergunta.save()
         return HttpResponseRedirect(reverse('crudPerguntas'))
+
+    return render(request, 'main/crudPerguntas.html')
 
 def editar_pergunta(request, pergunta_id):
     pergunta = get_object_or_404(Pergunta, pk=pergunta_id)
 
     if request.method == 'POST':
         pergunta.pergunta_texto = request.POST.get('pergunta_texto')
+        pergunta.imagem = request.FILES.get('imagem')
         pergunta.resposta1 = request.POST.get('resposta1')
         pergunta.resposta2 = request.POST.get('resposta2')
         pergunta.resposta3 = request.POST.get('resposta3')
         pergunta.resposta4 = request.POST.get('resposta4')
         pergunta.respostacerta = request.POST.get('respostacerta')
+        pergunta.solucao = request.FILES.get('solucao')
         pergunta.save()
         mensagem = "Pergunta editada com sucesso."
         return HttpResponse(mensagem)
