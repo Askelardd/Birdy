@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,11 +22,20 @@
            
         </div>
     </div>
-    <script type="text/javascript">
-        function toggle(){
-            var blur = document.getElementById('blur');
-            blur.classList.toggle('active')
-        }
-    </script>
+
+    <div id="popup">
+        <h2>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio quaerat illum sapiente laboriosam iste architecto?</h2>
+        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eos quas quam pariatur vero molestiae molestias neque recusandae repellat asperiores quos? Blanditiis ipsa dignissimos, explicabo excepturi quas laborum voluptate cupiditate delectus eum quisquam, repudiandae expedita. Nulla optio quisquam beatae fugit adipisci.</p>
+        <a href="#" onclick="toggle()">Close</a>
+    </div>
+   
 </body>
+<script type="text/javascript">
+    function toggle(){
+        var blur = document.getElementById('blur');
+        blur.classList.toggle('active');
+        var popup = document.getElementById('popup');
+        popup.classList.toggle('active');
+    }
+</script>
 </html>
