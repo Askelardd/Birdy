@@ -7,89 +7,6 @@
     font-family: 'Montserrat',  sans-serif;
 }
 
-
-li,a, button{
-    font-family: "Montserrat", sans-serif;
-    font-weight: 700;
-    text-decoration: none;
-    font-size: 25px;
-    color: #f84a4a;
-}
-
-
-.logo{
-    cursor: pointer;
-    /* max-width: 85%;
-    max-height: 85%; */
-    width: 15%;
-}
-
-.nav-links{
-    list-style: none;
-}
-
-.nav-links li{
-    display: inline-block;
-}
-
-.nav-links li a{
-    transition: all 0.3 ease 0s;
-}
-
-.nav-links li a:hover{
-    transition: all 0.4s ease 0s;
-    color:#f99393;
-}
-
-.Logout{
-    padding: 9px 25px;
-    cursor: pointer;
-    background-color:#f84a4a;
-    color: #ffffff;
-    border: none;
-    border-radius: 40px;
-    transition: all 0.4s ease 0s;
-}
-
-.Logout:hover{
-    background-color: #D63737;
-    transition: all 0.4s ease 0s;
-}
-
-
-.header{
-    display: flex;
-    width: 100%;
-    justify-content: space-evenly;
-    align-items: center;
-    height: 20%;
-    padding: 0px 10%;
-    background-color: #ffffff;
-}
-
-.header-navigation a{
-    text-decoration: none;
-    width: 50%;
-    display: flex;
-    justify-content: space-evenly;
-    font-weight: bold;
-    padding-inline: 50px;
-    font-size: 30px;
-    color: #f84a4a;
-}
-
-header a:hover{
-    transition: all 0.4s ease 0s;
-    color: #f99393;
-}
-.header-img{
-    max-width: 40%;
-    max-height: 40%;
-    display: flex;
-    align-items: center;
-    padding: -1;
-}
-
 .birdy-wrapper{
     display: flex;
     flex-direction: column;
@@ -184,4 +101,98 @@ span{
     border-radius: 40px;
     transition: all 0.4s ease 0s;
     background-color:#000000;
+}
+
+
+
+/* ============================================================================================ */
+/* Nav-Bar */
+
+li,a, button{
+    font-family: "Montserrat", sans-serif;
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 25px;
+    color: #f84a4a;
+}
+
+.header{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    height: 20%;
+    padding: 0px 10%;
+    background-color: #ffffff;
+}
+
+.header-navigation{
+    display: flex;
+    align-items: center;
+}
+.header-navigation a{
+    text-decoration: none;
+    width: 50%;
+    font-weight: bold;
+    font-size: 30px;
+    color: #f84a4a;
+}
+
+header a:hover{
+    transition: all 0.4s ease 0s;
+    color: #f99393;
+}
+
+.logout{
+    padding: 9px 25px;
+    cursor: pointer;
+    background-color:#f84a4a;
+    color: #ffffff;
+    border: none;
+    border-radius: 40px;
+    transition: all 0.4s ease 0s;
+}
+
+.logout:hover{
+    background-color: #D63737;
+    transition: all 0.4s ease 0s;
+}
+
+.header-img{
+    max-width: 40%;
+    max-height: 40%;
+    display: flex;
+    align-items: center;
+    padding: -1;
+}
+
+.logo {
+    width: 110px;
+}
+
+.nav-links{
+    list-style: none;
+}
+
+.nav-links li{
+    display: inline-block;
+    padding: 0px 50px;
+}
+
+.nav-links li a{
+    transition: all 0.3 ease 0s;
+}
+
+.nav-links li a:hover{
+    transition: all 0.4s ease 0s;
+    color:#f99393;
+}
+
+.logout-button{
+    padding: 9px 25px;
+    cursor: pointer;
+    background-color:#f84a4a;
+    color: #ffffff;
+    border: none;
+    border-radius: 80px;
 }
