@@ -21,5 +21,7 @@ urlpatterns = [
     path('crud_Perguntas/', criar_form_perg, name='crud_perguntas'),
     path('crud_perguntas/editar/<int:pergunta_id>/', editar_pergunta, name='editar_pergunta'),
     path('crud_perguntas/deletar/<int:pergunta_id>/', deletar_pergunta, name='deletar_pergunta'),
+    path('perguntas-math/<str:categoria>/', perguntasMath, name='perguntasMath'),
+
     
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

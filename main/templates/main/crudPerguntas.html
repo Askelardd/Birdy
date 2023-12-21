@@ -15,7 +15,7 @@
     <form method="POST" action="{% url 'crud_perguntas' %}" enctype="multipart/form-data">
         {% csrf_token %}
 
-        <label for="Pergunta_texto">Pergunta:</label>
+        <label for="Pergunta_texto">Titulo:</label>
         <input type="text" name="Pergunta" id="pergunta" >
         <br>
 
@@ -46,6 +46,15 @@
         <label for="Solucao">Solucao:</label>
         <input type="file" name="Solucao" accept="image/*">
         <br>
+
+        <label for="Categoria">Categoria:</label>
+        <select type="text" name="Categoria">
+            <option value="geometria_plana">Geometria Plana</option>
+            <option value="operacoes_basicas">Operações Básicas</option>
+            <option value="fracoes">Frações</option>
+            <option value="porcentagens">Porcentagens</option>
+        </select>
+    <br>
 
         <button type="submit">Criar Pergunta</button>
     </form>

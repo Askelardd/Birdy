@@ -58,13 +58,15 @@
 
             <div class="cont1 col-6 p-5 ">
                 
-                    <button class="btn" onclick="window.location='{% url 'perguntasMath' %}'">
+                    <button class="btn" onclick="window.location='{% url 'perguntasMath' categoria='geometria_plana' %}'">
                         <img src="{% static "assets/Icone_Geometria_Plana.png" %}" class="forms ms-5"></img>
                         <img src="{% static "assets/Icone_Operacoe_Basicas.png" %}" class="forms"></img>
                         <img src="{% static "assets/Icones_Fracoes.png" %}" class="forms mt-3 ms-5"></img>
+                        
+                    </button>
+                    <button class="btn" onclick="window.location='{% url 'perguntasMath' categoria='porcentagens' %}'">
                         <img src="{% static "assets/Icones_Porcentagem.png" %}" class="forms mt-3"></img>
                     </button>
-
                    
             </div>
 

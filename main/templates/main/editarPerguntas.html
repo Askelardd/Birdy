@@ -12,8 +12,12 @@
     <h1>Editar Pergunta</h1>
     <form method="POST" action="">
         {% csrf_token %}
-        <label for="pergunta_texto">Pergunta:</label>
+        <label for="pergunta_texto">Titulo:</label>
         <input type="text" name="pergunta_texto" value="{{ pergunta.pergunta_texto }}" required><br>
+
+        <label for="imagem">Pergunta:</label>
+        <input type="file" name="imagem" value="{{ pergunta.imagem.url }}" required><br>
+        <br>
 
         <label for="resposta1">Resposta 1:</label>
         <input type="text" name="resposta1" value="{{ pergunta.resposta1 }}" required><br>
@@ -29,6 +33,20 @@
 
         <label for="respostacerta">Resposta Certa:</label>
         <input type="text" name="respostacerta" value="{{ pergunta.respostacerta }}" required><br>
+
+        <label for="solucao">Solucao:</label>
+        <input type="file" name="solucao" value="{{ pergunta.solucao.url }}" required><br>
+
+        <label for="Categoria">Categoria:</label>
+        <select type="text" name="Categoria" value="{{ pergunta.categoria }}" required>>
+            <option value="geometria_plana">Geometria Plana</option>
+            <option value="operacoes_basicas">Operações Básicas</option>
+            <option value="fracoes">Frações</option>
+            <option value="porcentagens">Porcentagens</option>
+        </select>
+
+        <br>
+        <br>
 
         <button type="submit">Salvar Edição</button>
     </form>

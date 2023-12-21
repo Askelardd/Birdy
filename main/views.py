@@ -140,6 +140,7 @@ def criar_form_perg(request):
         resposta4 = request.POST.get('Resposta4')
         respostacerta = request.POST.get('RespostaCorreta')
         solucao = request.FILES.get('Solucao')
+        categoria = request.POST.get('Categoria')
 
         # Gere um nome de arquivo único para as imagens
         imagem_nome = f"imagem_{get_random_string(6)}.png"
@@ -170,7 +171,8 @@ def criar_form_perg(request):
             resposta3=resposta3,
             resposta4=resposta4,
             respostacerta=respostacerta,
-            solucao=solucao_url
+            solucao=solucao_url,
+            categoria = categoria
         )
         nova_pergunta.save()
         return HttpResponseRedirect(reverse('crudPerguntas'))
@@ -199,3 +201,11 @@ def deletar_pergunta(request, pergunta_id):
     pergunta = get_object_or_404(Pergunta, pk=pergunta_id)
     pergunta.delete()
     return redirect('crudPerguntas')
+
+def perguntasMath(request, categoria=None):
+    if categoria:
+        perguntas = Pergunta.objects.filter(categoria=categoria)
+    else:
+        perguntas = Pergunta.objects.all()
+
+    return render(request, 'main/perguntasMath.html', {'perguntas': perguntas, 'categoria_selecionada': categoria})
