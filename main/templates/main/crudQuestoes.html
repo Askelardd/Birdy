@@ -1,0 +1,43 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>CRUD de Questoes</title>
+    </head>
+    <body>
+
+        <h1>Adicionar Questão</h1>
+        <form method="POST" action="{% url 'crud_questoes' %}">
+            {% csrf_token %}
+            
+            <label for="topico">Tópico:</label>
+            <select name="topico" required>
+                {% for topico in topicos %}
+                    <option value="{{ topico.id }}">{{ topico.nome }}</option>
+                {% endfor %}
+            </select><br>
+
+            <label for="pergunta">Pergunta:</label>
+            <textarea name="pergunta" required></textarea><br>
+
+            <button type="submit">Adicionar Questão</button>
+        </form>
+
+        
+        <h2>Lista de Questões</h2>
+
+        <ul>
+            {% for questao in questoes %}
+                <li>
+                    {{ questao.topico }}
+                    <a href="{% url 'editar_questao' questao.id %}">Editar</a>
+                    <a href="{% url 'deletar_questao' questao.id %}">Deletar</a>
+                </li>
+            {% endfor %}
+        </ul>
+
+    </body>
+</html>

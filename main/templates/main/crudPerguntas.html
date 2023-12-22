@@ -1,74 +1,73 @@
-<!-- crud_perguntas.html -->
 {% load static %}
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CRUD de Perguntas</title>
-</head>
-<body>
-    <h1>CRUD de Perguntas</h1>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>CRUD de Perguntas</title>
+    </head>
+    <body>
+        <h1>CRUD de Perguntas</h1>
 
-    <!-- Formulário para criar uma nova pergunta -->
-    <form method="POST" action="{% url 'crud_perguntas' %}" enctype="multipart/form-data">
-        {% csrf_token %}
+        <!-- Formulário para criar uma nova pergunta -->
+        <form method="POST" action="{% url 'crud_perguntas' %}" enctype="multipart/form-data">
+            {% csrf_token %}
 
-        <label for="Pergunta_texto">Titulo:</label>
-        <input type="text" name="Pergunta" id="pergunta" >
+            <label for="Pergunta_texto">Titulo:</label>
+            <input type="text" name="Pergunta" id="pergunta" >
+            <br>
+
+            <label for="Imagem">Pergunta:</label>
+            <input type="file" name="Imagem" accept="image/*">
+            <br>
+            
+            <label for="Resposta1">Resposta1:</label>
+            <input type="text" name="Resposta1" id="Resposta1" >
+            <br>
+
+            <label for="Resposta1">Resposta2:</label>
+            <input type="text" name="Resposta2" id="Resposta2" >
+            <br>
+
+            <label for="Resposta1">Resposta3:</label>
+            <input type="text" name="Resposta3" id="Resposta3" >
+            <br>
+
+            <label for="Resposta4">Resposta4:</label>
+            <input type="text" name="Resposta4" id="Resposta4" >
+            <br>
+
+            <label for="Resposta4">Resposta Correta:</label>
+            <input type="text" name="RespostaCorreta" id="RespostaCorreta" >
+            <br>
+            
+            <label for="Solucao">Solucao:</label>
+            <input type="file" name="Solucao" accept="image/*">
+            <br>
+
+            <label for="Categoria">Categoria:</label>
+            <select type="text" name="Categoria">
+                <option value="geometria_plana">Geometria Plana</option>
+                <option value="operacoes_basicas">Operações Básicas</option>
+                <option value="fracoes">Frações</option>
+                <option value="porcentagens">Porcentagens</option>
+            </select>
         <br>
 
-        <label for="Imagem">Pergunta:</label>
-        <input type="file" name="Imagem" accept="image/*">
-        <br>
+            <button type="submit">Criar Pergunta</button>
+        </form>
+
+        <h2>Lista de Perguntas</h2>
         
-        <label for="Resposta1">Resposta1:</label>
-        <input type="text" name="Resposta1" id="Resposta1" >
-        <br>
-
-        <label for="Resposta1">Resposta2:</label>
-        <input type="text" name="Resposta2" id="Resposta2" >
-        <br>
-
-        <label for="Resposta1">Resposta3:</label>
-        <input type="text" name="Resposta3" id="Resposta3" >
-        <br>
-
-        <label for="Resposta4">Resposta4:</label>
-        <input type="text" name="Resposta4" id="Resposta4" >
-        <br>
-
-        <label for="Resposta4">Resposta Correta:</label>
-        <input type="text" name="RespostaCorreta" id="RespostaCorreta" >
-        <br>
-        
-        <label for="Solucao">Solucao:</label>
-        <input type="file" name="Solucao" accept="image/*">
-        <br>
-
-        <label for="Categoria">Categoria:</label>
-        <select type="text" name="Categoria">
-            <option value="geometria_plana">Geometria Plana</option>
-            <option value="operacoes_basicas">Operações Básicas</option>
-            <option value="fracoes">Frações</option>
-            <option value="porcentagens">Porcentagens</option>
-        </select>
-    <br>
-
-        <button type="submit">Criar Pergunta</button>
-    </form>
-
-    <!-- Lista de Perguntas -->
-    <h2>Lista de Perguntas</h2>
-    <ul>
-        {% for pergunta in perguntas %}
-            <li>
-                {{ pergunta.pergunta_texto }}
-                <a href="{% url 'editar_pergunta' pergunta.id %}">Editar</a>
-                <a href="{% url 'deletar_pergunta' pergunta.id %}">Deletar</a>
-            </li>
-        {% endfor %}
-    </ul>
-</body>
+        <ul>
+            {% for pergunta in perguntas %}
+                <li>
+                    {{ pergunta.pergunta_texto }}
+                    <a href="{% url 'editar_pergunta' pergunta.id %}">Editar</a>
+                    <a href="{% url 'deletar_pergunta' pergunta.id %}">Deletar</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </body>
 </html>

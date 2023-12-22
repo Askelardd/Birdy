@@ -1,4 +1,5 @@
-from django.shortcuts import redirect
+from django.http import HttpResponseForbidden
+from django.shortcuts import redirect, render
 
 class VerificarAutenticacaoMiddleware:
     def __init__(self, get_response):
@@ -14,3 +15,4 @@ class VerificarAutenticacaoMiddleware:
 
         response = self.get_response(request)
         return response
+    

@@ -30,125 +30,32 @@
     </header>
 
 
-    <search class="search-bar"> 
-        <div class="search-text"><i class="fa-solid fa-magnifying-glass"></i>Pesquisar</div>
-        <button data-modal-target="#modal" class="ask-button">PERGUNTAR</button> 
-    </search>
-
-    <!-- Adicione o CSS do Bootstrap 5 -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbs5ZzvuED5JwwRU9t6ZlqF2tFZJ3/Jc/In1ddJZMq3a/R6aO7U2RTwSgUa73gF" crossorigin="anonymous">
-
-<!-- Seu código HTML -->
-<!-- Button que aciona o modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalLong">
-    Abrir modal de demonstração
-</button>
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Título do Modal</h5>
-                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Fechar">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="popup-body">
-                    <!-- Conteúdo principal do modal vai aqui -->
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores, deserunt labore cumque qui ea nulla at voluptas necessitatibus numquam odio aut fugiat laboriosam. Perspiciatis illo sit aut quia voluptates quam iste dolorem, dolore nulla aspernatur error quas velit quaerat ab consequatur eveniet aliquid rem cumque omnis beatae. Eveniet, eligendi facilis.
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                <button type="button" class="btn btn-primary">Salvar alterações</button>
-            </div>
-        </div>
-    </div>
-</div>
-  
-
-    <question class="question-popup active">
-        <div class="popup" id="modal">
-            <div class="popup-header">
-                <div class="title">Sla man</div>
-                <button data-close-button class="go-back"><img src="assets/Seta_2.png" class="arrow"></button>
-            </div>
-            <div class="popup-body">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores,
-                deserunt labore cumque qui ea nulla at voluptas necessitatibus
-                numquam odio aut fugiat laboriosam. Perspiciatis illo sit aut quia
-                voluptates quam iste dolorem, dolore nulla aspernatur error quas
-                velit quaerat ab consequatur eveniet aliquid rem cumque omnis beatae.
-                Eveniet, eligendi facilis.
-            </div>
-        </div>
-        <div class="active" id="overlay"></div>
-        
-        <!--<div class="popup">
-            <title class="popup-title">
-                Qual sua dúvida?
-            </title>
-            <input type="text" placeholder="Digite aqui" class="type-here">
-            
-            <title class="popuptitle">
-                Qual o Curso?
-            </title>
-
-            <input type="radio" class="choice">
-
-            <title class="popup-title">
-                Comentários:
-            </title>
-            <textarea placeholder="Digite Aqui" id="" cols="30" rows="10"></textarea>
-        </div>-->
-
-    </question>
+    <body>
+        <h1>Fórum</h1>
     
-    <content class="post">
-        <h2 class="post-title">Preciso de ajuda com equação de primeiro grau.</h2>
-        <p class="post-username">pergunta por @Aluno_Nsei</p>
-    </content>
+        {% for topico, questoes_e_respostas in questoes_por_topico.items %}
+        <h3>{{ topico }}</h3>
+        <ul>
+            {% for item in questoes_e_respostas %}
+                <li>
+                    <strong>{{ item.questao.pergunta }}</strong>
+                    {% if item.respostas %}
+                        <ul>
+                            {% for resposta in item.respostas.all %}
+                                <li>{{ resposta.resposta }}</li>
+                                <li>{{ resposta.autor}} </li>
+                                <br>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p>Sem respostas ainda.</p>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    {% endfor %}
+
     
-    <comment>
-        <li>
-            <user class="user-comments"> 
-                <h3 class="username">
-                    <img src="assets/Default_User.png" class="user-img"> @Lucas_Alfa
-                    <h4 class="user-tag">PROFESSOR</h4>
-                </h3>
-
-                <h5 class="user-text">Isso é simples temos Lorem ipsum dolor sit amet, consectetur 
-                    adipiscing elit, sed do eiusmod tempor incididunt ut labore 
-                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud </h5>
-            </user>
-        </li>
-
-        <li>
-            <user class="user-comments">
-                <h3 class="username"><img src= href="{% static "css/Default_User.png" %}" class="user-img">Bela_Sepulcri</h3>
-                <h5 class="user-text">Isso é simples temos Lorem ipsum dolor sit amet, consectetur 
-                    adipiscing elit, sed do eiusmod tempor incididunt ut labore 
-                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud </h5>
-            </user>
-        </li>
-
-        <li>
-            <user class="user-comments">
-                <h3 class="username"><img src="assets/Default_User.png" class="user-img">@Poster_Gueist</h3>
-                <h5 class="user-text">Isso é simples temos Lorem ipsum dolor sit amet, consectetur 
-                    adipiscing elit, sed do eiusmod tempor incididunt ut labore 
-                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud </h5>
-            </user>
-        </li>
-
-    </comment>
-
-    <type class="comment-bar">
-        COMENTAR
-        <i class="fa-solid fa-paper-plane"></i>    
-    </type>
+   </body>
    
-</body>
 </html>

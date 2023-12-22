@@ -1,14 +1,17 @@
+from functools import wraps
 import os
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseForbidden, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from django.urls import reverse
-from main.models import Pergunta
+from main.models import *
 from .forms import LoginForm, RegistrationForm
 from django.contrib.auth import logout
 from django.conf import settings
 from django.utils.crypto import get_random_string
+from django.contrib.auth.decorators import user_passes_test
+
 
  # renderizacao das paginas
  
@@ -18,12 +21,29 @@ def index(request):
 def cursos(request):
     return render(request, 'main/cursos.html') 
 
+
 def editarPerguntas(request):
     return render(request, 'main\editarPerguntas.html')
+
+
+def editarQuestao(request):
+    return render(request, 'main\editarQuestao.html')
+
+
+def crudQuestoes(request):
+    questoes = Questao.objects.all()
+    topicos = Topico.objects.all()
+    return render(request, 'main/crudQuestoes.html', {'questoes': questoes, 'topicos': topicos})
+
+def is_professor(user):
+    return user.is_authenticated and user.perfil.tipo_usuario == 'professor' or 'admin'
+
+@user_passes_test(is_professor, login_url='index')#criar pagina de acesso negado
 
 def crudPerguntas(request):
     perguntas = Pergunta.objects.all()
     return render(request, 'main/crudPerguntas.html',{'perguntas':perguntas}) 
+
 
 def perguntasMath(request):
     print("Isto foi corrido")
@@ -91,47 +111,43 @@ def logout_view(request):
 def verificar_resposta(request, pergunta_id):
     pergunta = Pergunta.objects.get(pk=pergunta_id)
 
+    # Defina uma resposta padrão
+    resposta = ""
+
     # Verifica se a resposta do usuário é igual à resposta correta
     resposta_usuario = request.GET.get('resposta', None)
     if resposta_usuario and resposta_usuario == pergunta.respostacerta:
         mensagem = "Resposta correta!"
-        pontos = request.session.get('pontos', 0)
-        pontos += 1
-        request.session['pontos'] = pontos
-        print(pontos)
-        resposta = f"{mensagem} Pontos: {pontos}"
+
+        usuario_existente = request.user
+
+        # Tenta obter o perfil do usuário, cria um novo se não existir
+        try:
+            perfil_usuario = Perfil.objects.get(user=usuario_existente)
+        except Perfil.DoesNotExist:
+            perfil_usuario = Perfil(user=usuario_existente, tipo_usuario='aluno', pontos=0)
+            perfil_usuario.save()
+
+        if perfil_usuario.tipo_usuario == 'aluno':
+            pontos_atuais = perfil_usuario.pontos
+            perfil_usuario.pontos += 10  # Adiciona 10 pontos, por exemplo
+            perfil_usuario.save()
+            resposta = f"{mensagem} Pontos: {pontos_atuais}"
+            
     else:
         resposta = "Resposta errada."
         
+        # Limpar a sessão se a resposta estiver errada
         request.session.clear()
-    return HttpResponse(resposta) 
 
-# def criar_form_perg(request):
-        
-#     if request.method == 'POST':
-#         pergunta_texto = request.POST.get('Pergunta')
-#         imagem = request.FILES.get('Imagem')
-#         resposta1 = request.POST.get('Resposta1')
-#         resposta2 = request.POST.get('Resposta2')
-#         resposta3 = request.POST.get('Resposta3')
-#         resposta4 = request.POST.get('Resposta4')
-#         respostacerta = request.POST.get('RespostaCorreta')
-#         solucao = request.FILES.get('Solucao')
-#         nova_pergunta = Pergunta.objects.create(
-#             pergunta_texto=pergunta_texto,
-#             imagem = imagem,
-#             resposta1=resposta1,
-#             resposta2=resposta2,
-#             resposta3=resposta3,
-#             resposta4=resposta4,
-#             respostacerta=respostacerta,
-#             solucao = solucao
-#         )
-#         nova_pergunta.save()
-#         return HttpResponseRedirect(reverse('crudPerguntas'))
+    # Retorna a resposta
+    return HttpResponse(resposta)
+    
 
 def criar_form_perg(request):
+    
     if request.method == 'POST':
+        
         pergunta_texto = request.POST.get('Pergunta')
         imagem = request.FILES.get('Imagem')
         resposta1 = request.POST.get('Resposta1')
@@ -202,6 +218,7 @@ def deletar_pergunta(request, pergunta_id):
     pergunta.delete()
     return redirect('crudPerguntas')
 
+
 def perguntasMath(request, categoria=None):
     if categoria:
         perguntas = Pergunta.objects.filter(categoria=categoria)
@@ -209,3 +226,70 @@ def perguntasMath(request, categoria=None):
         perguntas = Pergunta.objects.all()
 
     return render(request, 'main/perguntasMath.html', {'perguntas': perguntas, 'categoria_selecionada': categoria})
+
+
+def forum(request):
+    topicos = Topico.objects.all()
+    questoes_por_topico = {}
+
+    for topico in topicos:
+        # Filtrar as questões relacionadas a cada tópico
+        todas_questoes = Questao.objects.filter(topico=topico)
+        questoes_e_respostas = []
+
+        for questao in todas_questoes:
+            # Para cada questão, obter suas respostas
+            respostas = Resposta.objects.filter(questao=questao)
+            questoes_e_respostas.append({'questao': questao, 'respostas': respostas})
+
+        questoes_por_topico[topico] = questoes_e_respostas
+
+    return render(request, 'main/forum.html', {'topicos': topicos, 'questoes_por_topico': questoes_por_topico})
+
+def adicionar_questao(request):
+    if request.method == 'POST':
+        topico_id = request.POST.get('topico')
+        pergunta = request.POST.get('pergunta')
+
+        if topico_id and pergunta:
+            topico = Topico.objects.get(id=topico_id)
+
+            nova_questao = Questao.objects.create(
+                topico=topico,
+                autor=request.user,
+                pergunta=pergunta
+            )
+
+            # Redirecione para a página correta após adicionar a questão
+            return redirect('forum')  # Substitua 'forum' pelo URL correto da página do fórum
+
+    # Se não for um POST, renderize o formulário com os tópicos disponíveis
+    topicos = Topico.objects.all()
+    return render(request, 'main/crudQuestoes.html', {'topicos': topicos})
+
+
+
+def editar_questao(request, questao_id):
+    
+    print("ola")
+    print(f"questao_id: {questao_id}")
+    questoes = get_object_or_404(Questao, id=questao_id)
+    
+    if request.method == 'POST':
+        print("olas")
+        topico_id = request.POST.get('topico')
+        pergunta = request.POST.get('pergunta')
+
+        if topico_id and pergunta:
+            topico = Topico.objects.get(id=topico_id)
+            questoes.topico = topico
+            questoes.pergunta = pergunta
+            questoes.save()
+            return redirect('forum')  # Substitua 'forum' pelo URL correto da página do fórum
+
+    return render(request, 'main/crudQuestoes.html', {'questoes': questoes})
+
+def deletar_questao(request, questao_id):
+    questoes = get_object_or_404(Questao, id=questao_id)
+    questoes.delete()
+    return redirect('forum')  # Substitua 'forum' pelo URL correto da página do fórum
