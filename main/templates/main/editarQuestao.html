@@ -1,4 +1,3 @@
-<!-- seuapp/templates/main/editar_pergunta.html -->
 {% load static %}
 
 <!DOCTYPE html>
@@ -11,23 +10,27 @@
 
     <body>
 
+        {% if questao %}
         <h1>Editar Questão</h1>
-        
-        <form method="POST" action="">
+        <form method="POST" action="{% url 'editar_questao' questao.id %}">
             {% csrf_token %}
-            
+        
             <label for="topico">Tópico:</label>
             <select name="topico" required>
                 {% for topico in topicos %}
                     <option value="{{ topico.id }}" {% if topico.id == questao.topico.id %}selected{% endif %}>{{ topico.nome }}</option>
                 {% endfor %}
             </select><br>
-
+        
             <label for="pergunta">Pergunta:</label>
             <textarea name="pergunta" required>{{ questao.pergunta }}</textarea><br>
-
-            <button type="submit">Salvar Edição</button>
+        
+            <button type="submit">Salvar Edições</button>
         </form>
+
+        {% else %}
+            <p>A questão não foi encontrada.</p>
+        {% endif %}
 
     </body>
 </html>

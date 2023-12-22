@@ -246,50 +246,39 @@ def forum(request):
 
     return render(request, 'main/forum.html', {'topicos': topicos, 'questoes_por_topico': questoes_por_topico})
 
-def adicionar_questao(request):
+
+
+def criar_questao(request):
     if request.method == 'POST':
         topico_id = request.POST.get('topico')
         pergunta = request.POST.get('pergunta')
 
         if topico_id and pergunta:
             topico = Topico.objects.get(id=topico_id)
+            nova_questao = Questao.objects.create(topico=topico, autor=request.user, pergunta=pergunta)
+            return redirect('forum')
 
-            nova_questao = Questao.objects.create(
-                topico=topico,
-                autor=request.user,
-                pergunta=pergunta
-            )
-
-            # Redirecione para a página correta após adicionar a questão
-            return redirect('forum')  # Substitua 'forum' pelo URL correto da página do fórum
-
-    # Se não for um POST, renderize o formulário com os tópicos disponíveis
     topicos = Topico.objects.all()
-    return render(request, 'main/crudQuestoes.html', {'topicos': topicos})
-
-
+    return render(request, 'sua_template.html', {'topicos': topicos})
 
 def editar_questao(request, questao_id):
-    
-    print("ola")
-    print(f"questao_id: {questao_id}")
-    questoes = get_object_or_404(Questao, id=questao_id)
-    
+    questao = get_object_or_404(Questao, id=questao_id)
+
     if request.method == 'POST':
-        print("olas")
         topico_id = request.POST.get('topico')
         pergunta = request.POST.get('pergunta')
 
         if topico_id and pergunta:
             topico = Topico.objects.get(id=topico_id)
-            questoes.topico = topico
-            questoes.pergunta = pergunta
-            questoes.save()
-            return redirect('forum')  # Substitua 'forum' pelo URL correto da página do fórum
+            questao.topico = topico
+            questao.pergunta = pergunta
+            questao.save()
+            return redirect('forum')
 
-    return render(request, 'main/crudQuestoes.html', {'questoes': questoes})
+    topicos = Topico.objects.all()
+    return render(request, 'main/editarQuestao.html', {'questao': questao, 'topicos': topicos})
 
 def deletar_questao(request, questao_id):
-    questoes = get_object_or_404(Questao, id=questao_id)
-    questoes.delete()
-    return redirect('forum')  # Substitua 'forum' pelo URL correto da página do fórum
+    questao = get_object_or_404(Questao, id=questao_id)
+    questao.delete()
+    return redirect('forum')

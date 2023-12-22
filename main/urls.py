@@ -13,8 +13,8 @@ urlpatterns = [
     path('forum/', forum, name='forum'),
     path('cursos/', cursos, name='cursos'),
     path('perguntasMath/', perguntasMath, name='perguntasMath'),
-    path('crudPerguntas/', crudPerguntas, name='crudPerguntas'),
-    path('crudQuestoes/', adicionar_questao, name='crudQuestoes'),
+    path('crudPerguntas/', crudPerguntas, name='crudPerguntas'),  
+    path('crudQuestoes/', crudQuestoes, name='crudQuestoes'),  
     path('verificar_resposta/<int:pergunta_id>/', verificar_resposta, name='verificar_resposta'),
     path('perguntas-math/<str:categoria>/', perguntasMath, name='perguntasMath'),
 
@@ -24,9 +24,12 @@ urlpatterns = [
     path('crud_perguntas/editar/<int:pergunta_id>/', editar_pergunta, name='editar_pergunta'),
     path('crud_perguntas/deletar/<int:pergunta_id>/', deletar_pergunta, name='deletar_pergunta'),
     
-    path('crud_Questoes/', adicionar_questao, name='crud_questoes'),
+    path('criar_questao/', criar_questao, name='criar_questao'),
+    path('editar_questao/<int:questao_id>/', editar_questao, name='editar_questao'),
+    path('deletar_questao/<int:questao_id>/', deletar_questao, name='deletar_questao'),
     path('editarQuestao/', editarQuestao, name='editarQuestao'),
-    path('crud_Questoes/editar/<int:questao_id>/', editar_questao, name='editar_questao'),
-    path('crud_Questoes/deletar/<int:questao_id>/', deletar_questao, name='deletar_questao'),
+    
+    
+    
     
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
