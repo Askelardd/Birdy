@@ -10,21 +10,25 @@
 .birdy-wrapper{
     display: flex;
     flex-direction: column;
-    align-items: center;
+    justify-content: center;
+    margin-right: 150px;
 }
 
 .birdy{
-    width: 40%;
+    width: 400px;
+    height: 400px;
     transition: 0.4s;
     padding-top: 50px;
 }
 
 .shadow{
-    width: 35%;
+    width: 300px;
+    height: 100px;
 }
 
 .birdy:hover{
-    width: 45%;
+    width: 450px;
+    height: 450px;
     transition: 0.4s;
 }
 
@@ -36,9 +40,7 @@ span{
 .wrapper{
     display: flex;
     justify-content: center;
-    margin-left: 30px;
-    margin-right: 100px;
-
+    align-items: center;
 }
 
 .main{
@@ -83,27 +85,6 @@ span{
     transition: all 0.4s ease 0s;
     background-color: #D63737;
 }
-
-
-.button-more{
-    background-color: #2B2B2B;
-    margin-bottom: 20px;
-    border-radius: 20px;
-    border: none;
-    padding: 16px 20px;
-    font-size: 25px;
-    color: white;
-    font-weight: 700;
-    transition: all 0.4s ease 0s;
-}
-
-.button-more:hover{
-    border-radius: 40px;
-    transition: all 0.4s ease 0s;
-    background-color:#000000;
-}
-
-
 
 /* ============================================================================================ */
 /* Nav-Bar */

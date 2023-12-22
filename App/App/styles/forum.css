@@ -3,7 +3,6 @@
 *{
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
     font-family: 'Montserrat',  sans-serif;
 
 }
@@ -99,18 +98,30 @@ p{
     list-style-type: none;
     justify-items: center;
     margin-top: 30px; 
+
 }
 
 h5{
     align-items: right;
     color: #464646;
+    font-size: 8px;
 }
-
 
 .username{
     font-weight: 500;
     color: #464646;
+}
+
+.username h2{
+    font-size: 25px;
+    font-weight: 700;
+    color: #f84a4a;
+    margin-right: 20px;
+}
+
+.user-comments .username{
     display: flex;
+    align-items: center;
 }
 
 .user-text{
@@ -134,12 +145,18 @@ h5{
 }
 
 .comment-bar{
-    background-color: #D9D9D9;
+    background-color: #c1c1c1;
     border-radius: 0px 0px 15px 15px;
     padding: 10px;
     width: 80%;
-    color: #818181;
+    display: flex;
+    justify-content: space-between;
 }
+
+.comment-bar input::placeholder{
+    color: #333333;
+}
+
 .container{
     background-color: #ffffff;
     border-radius: 30px;
@@ -158,6 +175,19 @@ h5{
     align-items: center;
 }
 
+.comment-text{
+    background: none;
+    width: 100%;
+    outline: none;
+    font-size: 18px;
+    border: none;
+    color: #333333;
+    padding-left: 10px;
+}
+
+.send{
+    width: 25px;
+}
 /*==================================================================================== */
 /* Nav-bar */
 
