@@ -1,0 +1,218 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Ubuntu:wght@300;400;500;700&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat',  sans-serif;
+
+}
+
+body{
+    background-color: #f84a4a;
+    background: linear-gradient(to right,#f6d2d2,  #f99393);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+}
+
+h1{
+    font-weight: 700;
+    text-align: center;
+    color: #f84a4a;
+}
+
+p{
+    font-weight: 700;
+    color: #f84a4a;
+}
+
+.nome-curso{
+    font-weight: 700;
+    color: #f84a4a;
+}
+
+content{
+    display: flex;
+    flex-direction: column;
+}
+
+.container{
+    background-color: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 15%);
+    position: relative;
+    overflow: hidden;
+    padding: 20px;
+}
+
+.arrow{
+    max-width: 30px;
+    align-items: center;
+}
+
+.progress{
+    width: 160px;
+    height:160px;
+    position: relative;
+}
+
+.outer{
+    height: 250px;
+    width: 250px;
+    border-radius: 50%;
+    padding: 20px;
+    background: #f99393;
+    /*box-shadow: 6px 6px 10px -1px rgb(197, 12, 12, 0.15),
+                -6px -6px 10px -1px rgb(255, 255, 255, 0.7)*/
+   
+}
+
+.inner{
+    height: 210px;
+    width: 210px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /*box-shadow: inset 4px 4px 6px -1px rgba(197, 12, 12, 0.2),
+                inset -4px -4px 6px -1px rgb(255, 255, 255, 0.7),
+                -0.5px -0.5px 0px rgb(255, 255, 255, 1),
+                0.5px 0.5px 0px rgb( 197, 12, 12, 0.15),
+                0pc 12px 10px -10px rgb( 197, 12, 12, 0.05)*/
+    background: #ffffff;
+}
+
+.percent-number{
+    font-weight: 700;
+    text-align: center;
+    color: #f84a4a;
+    font-size: 50px;
+}
+
+.percent-complete{
+    font-weight: 700;
+    text-align: center;
+    color: #f84a4a;
+    font-size: 25px;
+}
+
+circle{
+    fill: none;
+    stroke: #f84a4a;
+    stroke-width: 20px;
+    stroke-dasharray: 885;
+    stroke-dashoffset: 885;
+    animation: anim 2s linear forwards;
+}
+
+svg{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 250px;
+}
+
+/*Conta para fazer a animação: 
+885 - 885 * a porcentagem que eu quero*/
+@keyframes anim{
+    
+    100%{
+        stroke-dashoffset: 309.75;
+    }
+}
+
+/* ====================================================================== */
+/* Nav-Bar */
+
+
+li,a, button{
+    font-family: "Montserrat", sans-serif;
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 25px;
+    color: #f84a4a;
+}
+
+.header{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    height: 20%;
+    padding: 0px 10%;
+    background-color: #ffffff;
+}
+
+.header-navigation{
+    display: flex;
+    align-items: center;
+}
+.header-navigation a{
+    text-decoration: none;
+    width: 50%;
+    font-weight: bold;
+    font-size: 30px;
+    color: #f84a4a;
+}
+
+header a:hover{
+    transition: all 0.4s ease 0s;
+    color: #f99393;
+}
+
+.logout{
+    padding: 9px 25px;
+    cursor: pointer;
+    background-color:#f84a4a;
+    color: #ffffff;
+    border: none;
+    border-radius: 40px;
+    transition: all 0.4s ease 0s;
+}
+
+.logout:hover{
+    background-color: #D63737;
+    transition: all 0.4s ease 0s;
+}
+
+.header-img{
+    max-width: 40%;
+    max-height: 40%;
+    display: flex;
+    align-items: center;
+    padding: -1;
+}
+
+.logo {
+    width: 110px;
+}
+
+.nav-links{
+    list-style: none;
+}
+
+.nav-links li{
+    display: inline-block;
+    padding: 0px 50px;
+}
+
+.nav-links li a{
+    transition: all 0.3 ease 0s;
+}
+
+.nav-links li a:hover{
+    transition: all 0.4s ease 0s;
+    color:#f99393;
+}
+
+.logout-button{
+    padding: 9px 25px;
+    cursor: pointer;
+    background-color:#f84a4a;
+    color: #ffffff;
+    border: none;
+    border-radius: 80px;
+}
