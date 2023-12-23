@@ -207,7 +207,28 @@ header a:hover{
     transition: 0.5s;
 }
 
-.popup-form input{
+#popup-p{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 600px;
+    padding: 20px;
+    box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+    background: #fff;
+    visibility: hidden; /* Change */
+    opacity: 0;
+    transition: 0.5s;
+    border-radius: 20px;
+}
+
+#popup-p.active{
+    visibility: visible;
+    opacity: 1;
+    transition: 0.5s;
+}
+
+.popup-form input, .popup-form textarea, .popup-forms select{
     width: 100%;
     padding: 10px 10px 10px 15px;
     margin-bottom: 15px;
@@ -224,7 +245,21 @@ header a:hover{
 .popup-form button{
     background-color: #f84a4a;
     margin-bottom: 10px;
-    margin-left: 175px;
+    margin-left: 170px;
+    border-radius: 15px;
+    border: none;
+    padding: 10px 15px;
+    font-size: 18px;
+    color: white;
+    font-weight: 700;
+    transition: all 0.4s ease 0s;
+}
+
+
+.popup-p .popup-form button{
+    background-color: #f84a4a;
+    margin-bottom: 10px;
+    margin-left: 0px;
     border-radius: 15px;
     border: none;
     padding: 10px 15px;
@@ -269,4 +304,22 @@ label{
     font-family: 'Montserrat',  sans-serif;
     cursor: pointer;
     font-size: 15px;
+}
+
+.topic{
+    margin-bottom: 30px;
+}
+
+.topic label{
+    font-weight: 700;
+    font-size: 20px;
+    color: #f84a4a;
+}
+
+.topic select{
+    border-radius: 30px;
+    background-color: #f84a4a;
+    color: #fff;
+    border: none;
+    padding: 8px;
 }
