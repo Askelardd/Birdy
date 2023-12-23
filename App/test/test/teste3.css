@@ -1,0 +1,156 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Ubuntu:wght@300;400;500;700&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat',  sans-serif;
+
+}
+
+body{
+    background-color: #f84a4a;
+    background: linear-gradient(to right,#f6d2d2,  #f99393);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.back-button{
+    border: none;
+    background: none;
+}
+
+.arrow{
+    max-width: 35px;
+    max-height: 35px;
+    padding-left: 10px;
+}
+
+
+.question{
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+
+}
+
+.question-header{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    margin-right: 40px;
+}
+
+.question-text{
+    text-decoration: none;
+}
+
+.crud-img{
+    width: 300px;
+
+}
+
+.container{
+    background-color: #ffffff;
+    border-radius: 30px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 30%);
+    position: relative;  
+    display: flex;
+    justify-content: center;
+    width: 500px;
+    padding: 50px;
+}
+
+.container ul{
+    list-style: none;
+}
+
+.button{
+    background-color: #f84a4a;
+    margin: 20px;
+    border-radius: 20px;
+    border: none;
+    padding: 16px 20px;
+    font-size: 25px;
+    color: white;
+    font-weight: 700;
+    width: 300px;
+    height: 100px;
+    box-shadow: 0 8px 0 #D63737;
+    transition: 0.2s;
+}
+
+.button:hover{
+    background-color: #f96a6a;
+    transition: 0.2s;
+}
+
+.button:active{
+    box-shadow: none;
+    transform: translateY(8px);
+}
+
+.up{
+    display: flex;
+    justify-content: center;
+}
+
+.down{
+    display: flex;
+    justify-content: center;
+}
+
+
+/*========================================================================*/
+/* Pop-up */
+.cont{
+    display: flex;
+    flex-direction: column;
+}
+
+.cont.active#blur{
+   filter: blur(10px);
+   pointer-events: none;
+   user-select: none;
+}
+
+#popup{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 80%;
+    padding: 20px;
+    box-shadow: 0 5px 30px rgba(0, 0, 0, 0.3);
+    background: #fff;
+    visibility: hidden; /* Change */
+    opacity: 0;
+    transition: 0.5s;
+    border-radius: 20px;
+}
+
+#popup.active{
+    visibility: visible;
+    opacity: 1;
+    transition: 0.5s;
+}
+
+.popup{
+    display: flex;
+    flex-direction: column;
+}
+
+.popup-img{
+    width: 500px;
+    height: 20px;
+}
+
+@media(max-width: 900px){
+    .comment-box{
+        width: 80%;
+        margin: 5%;
+    }
+}
