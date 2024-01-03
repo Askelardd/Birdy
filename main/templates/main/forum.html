@@ -2,60 +2,123 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link rel="stylesheet" href="{% static "css/forum.css" %}">
-    <title>Birdy</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-    <link rel="icon" href="{% static 'assets/Passaro_Birdy.png' %}" type="image/x-icon"> 
-</head>
-
-<body>
-   <header class="header">
-        <img src="{% static "assets/logo.png" %}" class="logo"></img>
-        <nav class="header-navigation">
-            <ul class="nav-links">
-                <li><a href="#">Cursos</a></li>
-                <li><a href="#">Fórum</a></li>
-                <li><a href="#">Contato</a></li>
-            </ul>
-        </nav>
-
-        <form method="POST" action="{% url 'logout' %}">
-            {% csrf_token %}
-            <button class="logout" type="submit">Logout</button>
-        </form>
-    </header>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+        <link rel="stylesheet" href="{% static "css/forum.css" %}">
+        <title>Birdy</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+        <link rel="icon" href="{% static 'assets/Passaro_Birdy.png' %}" type="image/x-icon"> 
+    </head>
 
 
     <body>
-        <h1>Fórum</h1>
-    
-        {% for topico, questoes_e_respostas in questoes_por_topico.items %}
-        <h3>{{ topico }}</h3>
-        <ul>
-            {% for item in questoes_e_respostas %}
-                <li>
-                    <strong>{{ item.questao.pergunta }}</strong>
-                    {% if item.respostas %}
-                        <ul>
-                            {% for resposta in item.respostas.all %}
-                                <li>{{ resposta.resposta }}</li>
-                                <li>{{ resposta.autor}} </li>
-                                <br>
-                            {% endfor %}
+        <div class="cont" id="blur">
+            <div class="blur" id="blur">
+                <header class="header">
+                        <a href="index.html"><img src="{% static 'assets/logo.png' %}" class="logo"></img></a>
+                    <nav class="header-navigation">
+                        <ul class="nav-links">
+                            <li><a href="uc.html">Cursos</a></li>
+                            <li><a href="forum.html">Fórum</a></li>
+                            <li><a href="perfil.html">Perfil</a></li>
                         </ul>
-                    {% else %}
-                        <p>Sem respostas ainda.</p>
-                    {% endif %}
-                </li>
-            {% endfor %}
-        </ul>
-    {% endfor %}
+                    </nav>
+                    <form method="POST" action="{% url 'logout' %}">
+                        {% csrf_token %}
+                        <a ><button class="logout" type="submit">Logout</button> </a>
+                    </form>
+                </header>
+        
 
-    
-   </body>
-   
+
+                <div class="wrapper">
+                    <div class="search-bar"> 
+                            <input type="search" placeholder="Pesquisar"class="search-text"></i></input>
+                            <a onclick="toggle()" class="ask-button">PERGUNTAR</a> 
+                    </div>
+                        
+                    <div class="post">
+                        {% for topico, questoes_e_respostas in questoes_por_topico.items %}
+                            <h3>{{ topico }}</h3>
+                            {% for item in questoes_e_respostas %}
+                                <h2 class="post-title">{{ item.questao.pergunta }}</h2>
+                                <p class="post-username">@{{ item.questao.autor.username }} <span class="progtop">{{ topico }}</span></p>
+                                {% if item.respostas %}
+                                    <div class="comment">
+                                        <div class="user-comments">
+                                            {% for resposta in item.respostas.all %}
+                                                <div class="username">
+                                                    <img src="{% static 'assets/Default_User.png' %}" class="user-img">
+                                                    <h2>{{ resposta.autor.username }} </h2>
+                                                    {% with perfil=resposta.autor.perfil %}
+                                                        <h4 class="user-tag">{{ perfil.tipo_usuario }}</h4>
+                                                    {% endwith %}
+                                                </div>
+                                                <h5 class="user-text">{{ resposta.resposta }}</h5>
+                                            {% endfor %}
+                                            <div class="comment-bar">
+                                                <input type="search" placeholder="Comentar"class="comment-text"></i><!--<i class="fa-solid fa-magnifying-glass">--></i></input>
+                                                <a href="#"><img src="{% static '/assets/Send.png' %}" class="send"></img></a>   
+                                            </div>
+                                    
+                                        </div>
+                                    </div>
+                                {% else %}
+                                    <p>Sem respostas ainda.</p>
+                                    <div class="comment-bar">
+                                        <input type="search" placeholder="Comentar"class="comment-text"></i><!--<i class="fa-solid fa-magnifying-glass">--></i></input>
+                                        <a href="#"><img src="{% static '/assets/Send.png' %}" class="send"></img></a>   
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        {% endfor %}
+                    </div> 
+                </div>
+            </div>
+        </div>
+       
+
+    </body>
+
+    <div class="popup" id="popup">
+        
+        <form  class="popup-form" method="POST" action="{% url 'criar_questao' %}">
+            {% csrf_token %}
+            <div class="options">
+                <p>Qual o Curso?</p>
+                <a onclick="toggle()"><img src="{% static 'assets/Seta_2.png' %}" class="arrow"></a>
+            </div>
+            <div class="topic">
+                <label for="topico">Tópico:</label>
+                <select name="topico" required>
+                {% for topico in topicos %}
+                    <option class="topicos" value="{{ topico.id }}">{{ topico.nome }}</option>
+                {% endfor %}
+                </select>
+            </div>
+            <textarea placeholder="Digite sua dúvida aqui" rows="5" name="pergunta" required></textarea><br>
+        
+            <button type="submit">Adicionar Questão</button>
+        </form>
+
+
+
+    </div>
+
+    <script>
+        function toggle() {
+            var blur = document.getElementById('blur');
+            blur.classList.toggle('active');
+            
+            
+
+            var popup = document.getElementById('popup');
+            popup.classList.toggle('active');
+        }
+    </script>
+
 </html>
+
+

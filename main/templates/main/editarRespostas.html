@@ -1,0 +1,34 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Resposta</title>
+    <link rel="stylesheet" href="{% static "css/editarPerguntas.css" %}">
+</head>
+<body>
+
+  <div class="container">
+    <div class="alinhado">
+        <h1 class="tituloCRUD">Editar Resposta</h1>
+        <a class="seta" onclick="goBack()"><img src="{% static "assets/Seta_2.png" %}" class="arrow"></a>
+    </div>
+
+    <form class="popup-form" method="POST" action="{% url 'editar_resposta' resposta_id=resposta.id %}">
+      {% csrf_token %}
+
+      
+      <textarea placeholder="Resposta" name="resposta" required>{{ resposta.resposta }}</textarea>
+      
+      <button type="submit">Salvar Edições</button>
+    </form>
+  </div>
+
+</body>
+<script>
+  function goBack() {
+      window.history.back();
+  }
+</script>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD de Respostas</title>
+</head>
+<body>
+
+    <h1>CRUD de Respostas</h1>
+
+    {% for questao in questoes %}
+    <h2>Questão: {{ questao.pergunta }}</h2>
+
+    <form method="POST" action="{% url 'criar_resposta' questao_id=questao.id %}">
+        {% csrf_token %}
+        <label for="resposta">Resposta:</label>
+        <textarea name="resposta" required></textarea>
+        <button type="submit">Adicionar Resposta</button>
+    </form>
+
+    {% for resposta in questao.respostas.all %}
+        <div>
+            <p>{{ resposta.resposta }}</p>
+            <a href="{% url 'editar_resposta' resposta_id=resposta.id %}">Editar</a>
+            <a href="{% url 'deletar_resposta' resposta_id=resposta.id %}">Deletar</a>
+        </div>
+    {% endfor %}
+{% endfor %}
+
+
+</body>
+</html>

@@ -18,44 +18,34 @@
     
     <body>
 
-        <header class="mt-4" id="all">
-            <nav>
-                <div class="homebar">
-                    <img class="home" src="{% static 'assets/Logo_Birdy.png' %}" alt="">
-                </div>
-                <div>
-                    <div class="mobile-menu">
-                        
-                        <div class="line1"></div>
-                        <div class="line2"></div>
-                        <div class="line3"></div>
-                    </div>
-                    
-                    <ul class="nav-list">
-                        <li class="nav"><a class="nav-text" href="">Cursos</a></li>
-                        <li class="nav"><a class="nav-text" href="">Forum</a></li>
-                        <li class="nav"><a class="nav-text" href="">Contactos</a></li>
-                    </ul>
-                </div>
-            </nav>
-        </header>    
-        <div class="container">
-            <div class="d-flex justify-content-center">
+        <div class="cont" id="blur">
+            <div class="container">
                 <div class="row">
                     <div class="col-lg-12 p-5">
                         <div class="titulo mt-5"> 
-                            <ul>
+                            <ul class="overflow-auto">
                                 {% for pergunta in perguntas %}
                                     <li>
-                                        <h3>{{ pergunta.pergunta_texto }}</h3><br>
-                                        <img class="crud-img"src="{{ pergunta.imagem.url }}" alt="Imagem da Pergunta">
-                                        <br>
+                                        <div class="question-header">
+                                            <button onclick="goBack()" class="back-button"><img class="arrow" src="{% static 'assets/Seta_2.png' %}" ></button> 
+                                            <button onclick="toggle()" class="back-button"><img class="arrow" src="{% static 'assets/Ideia.png' %}" ></button> 
+                                            
+                                                <div class="question">
+                                                <h3 class="question-text">{{ pergunta.pergunta_texto }}</h3><br>
+                                                <img class="crud-img" src="{{ pergunta.imagem.url }}" alt="Imagem da Pergunta">
+                                            </div>
                                          
                                         <form action="{% url 'verificar_resposta' pergunta.id %}" method="get">
-                                            <button type="submit" name="resposta" value="{{ pergunta.resposta1 }}">A: {{ pergunta.resposta1 }} </button>
-                                            <button type="submit" name="resposta" value="{{ pergunta.resposta2 }}">B: {{ pergunta.resposta2 }} </button>
-                                            <button type="submit" name="resposta" value="{{ pergunta.resposta3 }}">C: {{ pergunta.resposta3 }} </button>
-                                            <button type="submit" name="resposta" value="{{ pergunta.resposta4 }}">D: {{ pergunta.resposta4 }} </button>
+                                            {% csrf_token %}
+        
+                                            <div class="up">
+                                                <button class="button" type="submit" name="resposta" value="{{ pergunta.resposta1 }}">A: {{ pergunta.resposta1 }} </button>
+                                                <button class="button" type="submit" name="resposta" value="{{ pergunta.resposta2 }}">B: {{ pergunta.resposta2 }} </button>
+                                            </div>
+                                            <div class="down">
+                                                <button class="button" type="submit" name="resposta" value="{{ pergunta.resposta3 }}">C: {{ pergunta.resposta3 }} </button>
+                                                <button class="button" type="submit" name="resposta" value="{{ pergunta.resposta4 }}">D: {{ pergunta.resposta4 }} </button>
+                                            </div>
                                         </form>
 
                                         <img class="crud-img"src="{{ pergunta.solucao.url }}" alt="Imagem da Pergunta">
@@ -72,6 +62,30 @@
                 </div>
             </div>
         </div>
+        
+        <div class="popup" id="popup">
+            <button onclick="toggle()" class="back-button"><img src="{% static 'assets/Seta_2.png' %}" class="arrow"></button> 
+            {% for pergunta in perguntas %}
+            <div class="solution" id="solution-{{ pergunta.id }}" style="display: none;">
+                <img class="crud-img" src="{{ pergunta.solucao.url }}" alt="Imagem da Solução">
+                <br>
+            </div>
+            {% endfor %}
+        </div>
+        
+        </body>
 
-    </body>
+        <script type="text/javascript">
+        
+            function goBack() {
+                window.history.back();
+            }
+        
+            function toggle(){
+                var blur = document.getElementById('blur');
+                blur.classList.toggle('active')
+                var popup = document.getElementById('popup');
+                popup.classList.toggle('active')
+            }
+        </script>
 </html> 

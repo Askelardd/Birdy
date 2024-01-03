@@ -208,3 +208,8 @@ body{
 .container.active .toggle-right{
     transform: translateX(200%);
 }
+
+.sign
+{
+    margin-bottom: 20px;
+}

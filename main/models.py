@@ -9,8 +9,7 @@ class Perfil(models.Model):
     )
 
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    tipo_usuario = models.CharField(max_length=10, choices=USUARIO_CHOICES)
-    
+    tipo_usuario = models.CharField(max_length=10, choices=USUARIO_CHOICES, default='aluno')
     pontos = models.IntegerField(default=0)  
 
     # Adicione outros campos específicos do perfil, se necessário

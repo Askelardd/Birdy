@@ -127,8 +127,20 @@ header a:hover{
 .nome-curso{
     font-weight: 700;
     color: #f84a4a;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+.wrapper
+{
+    margin-right: 190px;
 }
 
+.wrapper1
+{
+    margin-right: 200px;
+}
 
 .arrow{
     max-width: 30px;
@@ -213,3 +225,16 @@ svg{
     width: 42%; 
 }
 
+.btn
+{
+    width: 500px;
+}
+
+.math
+{
+    background: #ffffff;
+    border-radius: 15px;
+    font-weight: 700;
+    padding: 20px;
+    width: 370px;
+}

@@ -9,6 +9,7 @@ urlpatterns = [
     path('login/', login_view, name='login'),
     path('register/', register, name='register'),
     path('logout/', logout_view, name='logout'),
+    path('perfil/', perfil, name='perfil'),
     path('uc/', uc, name='uc'),  
     path('forum/', forum, name='forum'),
     path('cursos/', cursos, name='cursos'),
@@ -28,8 +29,19 @@ urlpatterns = [
     path('editar_questao/<int:questao_id>/', editar_questao, name='editar_questao'),
     path('deletar_questao/<int:questao_id>/', deletar_questao, name='deletar_questao'),
     path('editarQuestao/', editarQuestao, name='editarQuestao'),
+ 
     
     
+    path('resposta/criar/<int:questao_id>/', criar_resposta, name='criar_resposta'),
+    path('resposta/editar/<int:resposta_id>/', editar_resposta, name='editar_resposta'),
+    path('resposta/deletar/<int:resposta_id>/', deletar_resposta, name='deletar_resposta'),
+    path('crudRespostas/', crudRespostas, name='crudRespostas'),
+    
+    
+    path('allCruds/', allCruds, name='allCruds'),
+    
+    
+
     
     
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

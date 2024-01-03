@@ -1,6 +1,6 @@
 from functools import wraps
 import os
-from django.http import HttpResponse, HttpResponseForbidden, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseForbidden, HttpResponseRedirect, JsonResponse
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
@@ -21,6 +21,14 @@ def index(request):
 def cursos(request):
     return render(request, 'main/cursos.html') 
 
+def perfil(request):
+    perfil = Perfil.objects.get(user=request.user)
+    return render(request, 'main/perfil.html', {'perfil': perfil})
+
+    
+def crudRespostas(request):
+    questoes = Questao.objects.all()
+    return render(request, 'main/crudRespostas.html', {'questoes': questoes})
 
 def editarPerguntas(request):
     return render(request, 'main\editarPerguntas.html')
@@ -30,26 +38,42 @@ def editarQuestao(request):
     return render(request, 'main\editarQuestao.html')
 
 
+def allCruds(request):
+    questoes = Questao.objects.all()
+    perguntas = Pergunta.objects.all()
+    topicos = Topico.objects.all()
+    respostas = Resposta.objects.all()
+    return render(request, 'main/allCruds.html', {'questoes': questoes, 'topicos': topicos,'perguntas':perguntas,'respostas': respostas})
+
+
+def crud_respostas(request):
+    respostas = Resposta.objects.all()
+    questoes = Questao.objects.all()
+
+    return render(request, 'main/crudRespostas.html', {'respostas': respostas, 'questoes': questoes})
+
+
+
 def crudQuestoes(request):
     questoes = Questao.objects.all()
     topicos = Topico.objects.all()
     return render(request, 'main/crudQuestoes.html', {'questoes': questoes, 'topicos': topicos})
 
 def is_professor(user):
-    return user.is_authenticated and user.perfil.tipo_usuario == 'professor' or 'admin'
+    return user.is_authenticated and user.perfil.tipo_usuario in ['professor', 'admin']
+
 
 @user_passes_test(is_professor, login_url='index')#criar pagina de acesso negado
-
 def crudPerguntas(request):
     perguntas = Pergunta.objects.all()
     return render(request, 'main/crudPerguntas.html',{'perguntas':perguntas}) 
 
 
 def perguntasMath(request):
+    perfil = Perfil.objects.get(user=request.user)
     print("Isto foi corrido")
     perguntas = Pergunta.objects.all()
     return render(request, 'main/perguntasMath.html', {'perguntas': perguntas})
-    # return render(request, 'main/perguntasMath.html')
 
 def uc(request):
     return render(request, 'main/uc.html')
@@ -77,7 +101,6 @@ def login_view(request):
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 login(request, user)
-                messages.success(request, 'Login bem-sucedido!!!')
                 return redirect('uc')  # Redirecione para a página desejada após o login
             else:
                 messages.error(request, 'Credenciais inválidas. Verifique seu nome de usuário e senha.')
@@ -120,11 +143,13 @@ def verificar_resposta(request, pergunta_id):
         mensagem = "Resposta correta!"
 
         usuario_existente = request.user
-
+        print("ola")
         # Tenta obter o perfil do usuário, cria um novo se não existir
         try:
             perfil_usuario = Perfil.objects.get(user=usuario_existente)
+            
         except Perfil.DoesNotExist:
+            print("adeus")
             perfil_usuario = Perfil(user=usuario_existente, tipo_usuario='aluno', pontos=0)
             perfil_usuario.save()
 
@@ -133,15 +158,21 @@ def verificar_resposta(request, pergunta_id):
             perfil_usuario.pontos += 10  # Adiciona 10 pontos, por exemplo
             perfil_usuario.save()
             resposta = f"{mensagem} Pontos: {pontos_atuais}"
+            print({pontos_atuais})
             
     else:
         resposta = "Resposta errada."
-        
         # Limpar a sessão se a resposta estiver errada
         request.session.clear()
 
     # Retorna a resposta
+    if resposta == (""):
+        return HttpResponse("Vazio")
+    
     return HttpResponse(resposta)
+
+    
+        
     
 
 def criar_form_perg(request):
@@ -191,9 +222,9 @@ def criar_form_perg(request):
             categoria = categoria
         )
         nova_pergunta.save()
-        return HttpResponseRedirect(reverse('crudPerguntas'))
+        return HttpResponseRedirect(reverse('allCruds'))
 
-    return render(request, 'main/crudPerguntas.html')
+    return render(request, 'main/allCruds.html')
 
 def editar_pergunta(request, pergunta_id):
     pergunta = get_object_or_404(Pergunta, pk=pergunta_id)
@@ -208,15 +239,14 @@ def editar_pergunta(request, pergunta_id):
         pergunta.respostacerta = request.POST.get('respostacerta')
         pergunta.solucao = request.FILES.get('solucao')
         pergunta.save()
-        mensagem = "Pergunta editada com sucesso."
-        return HttpResponse(mensagem)
+        return redirect('allCruds')
 
     return render(request, 'main/editarPerguntas.html', {'pergunta': pergunta})
 
 def deletar_pergunta(request, pergunta_id):
     pergunta = get_object_or_404(Pergunta, pk=pergunta_id)
     pergunta.delete()
-    return redirect('crudPerguntas')
+    return redirect('allCruds')
 
 
 def perguntasMath(request, categoria=None):
@@ -259,7 +289,7 @@ def criar_questao(request):
             return redirect('forum')
 
     topicos = Topico.objects.all()
-    return render(request, 'sua_template.html', {'topicos': topicos})
+    return render(request, 'forum.html', {'topicos': topicos})
 
 def editar_questao(request, questao_id):
     questao = get_object_or_404(Questao, id=questao_id)
@@ -282,3 +312,40 @@ def deletar_questao(request, questao_id):
     questao = get_object_or_404(Questao, id=questao_id)
     questao.delete()
     return redirect('forum')
+
+
+def criar_resposta(request, questao_id):
+    questao = get_object_or_404(Questao, id=questao_id)
+
+    if request.method == 'POST':
+        resposta_texto = request.POST.get('resposta')
+
+        if resposta_texto:
+            Resposta.objects.create(questao=questao, autor=request.user, resposta=resposta_texto)
+            
+            return redirect('crudRespostas')
+
+    return render(request, 'main/crudRespostas.html', {'questao': questao, 'respostas': questao.respostas.all()})
+
+
+def editar_resposta(request, resposta_id):
+    resposta = get_object_or_404(Resposta, id=resposta_id)
+
+    if request.method == 'POST':
+        resposta_texto = request.POST.get('resposta')
+
+        if resposta_texto:
+            resposta.resposta = resposta_texto
+            resposta.save()
+
+            # Após editar a resposta, redirecione para a página 'crudRespostas'
+            return redirect('crudRespostas')
+
+    return render(request, 'main/editarRespostas.html', {'resposta': resposta})
+
+
+def deletar_resposta(request, resposta_id):
+    resposta = get_object_or_404(Resposta, id=resposta_id)
+    questao_id = resposta.questao.id
+    resposta.delete()
+    return redirect('detalhes_questao', questao_id=questao_id)

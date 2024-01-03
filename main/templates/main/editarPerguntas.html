@@ -2,52 +2,53 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editar Pergunta</title>
-</head>
-<body>
-    <h1>Editar Pergunta</h1>
-    <form method="POST" action="">
-        {% csrf_token %}
-        <label for="pergunta_texto">Titulo:</label>
-        <input type="text" name="pergunta_texto" value="{{ pergunta.pergunta_texto }}" required><br>
 
-        <label for="imagem">Pergunta:</label>
-        <input type="file" name="imagem" value="{{ pergunta.imagem.url }}" required><br>
-        <br>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{% static "css/editarPerguntas.css" %}">
+        <title>Editar Pergunta</title>
+    </head>
+    <body>
+        <div class="container">
 
-        <label for="resposta1">Resposta 1:</label>
-        <input type="text" name="resposta1" value="{{ pergunta.resposta1 }}" required><br>
+            <div class="alinhado">
+                <h1 class="tituloCRUD">Editar Pergunta</h1>
+                <a class="seta" onclick="goBack()"><img src="{% static "assets/Seta_2.png" %}" class="arrow"></a>
+            </div>
+            
+            <form class="popup-form" method="POST" action="" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input type="text" placeholder="Titulo" name="pergunta_texto" value="{{ pergunta.pergunta_texto }}" required><br>
 
-        <label for="resposta2">Resposta 2:</label>
-        <input type="text" name="resposta2" value="{{ pergunta.resposta2 }}" required><br>
+                <input type="file" placeholder="Pergunta" name="imagem" value="{{ pergunta.imagem.url }}" required><br>
 
-        <label for="resposta3">Resposta 3:</label>
-        <input type="text" name="resposta3" value="{{ pergunta.resposta3 }}" required><br>
+                <input type="text"placeholder="Alternativa1" name="resposta1" value="{{ pergunta.resposta1 }}" required><br>            
+                <input type="text" placeholder="Alternativa2" name="resposta2" value="{{ pergunta.resposta2 }}" required><br>
 
-        <label for="resposta4">Resposta 4:</label>
-        <input type="text" name="resposta4" value="{{ pergunta.resposta4 }}" required><br>
+                <input type="text" placeholder="Alternativa3" name="resposta3" value="{{ pergunta.resposta3 }}" required><br>
 
-        <label for="respostacerta">Resposta Certa:</label>
-        <input type="text" name="respostacerta" value="{{ pergunta.respostacerta }}" required><br>
+                <input type="text" placeholder="Alternativa4" name="resposta4" value="{{ pergunta.resposta4 }}" required><br>
 
-        <label for="solucao">Solucao:</label>
-        <input type="file" name="solucao" value="{{ pergunta.solucao.url }}" required><br>
+                <input type="text" placeholder="RespostaCorreta" name="respostacerta" value="{{ pergunta.respostacerta }}" required><br>
 
-        <label for="Categoria">Categoria:</label>
-        <select type="text" name="Categoria" value="{{ pergunta.categoria }}" required>>
-            <option value="geometria_plana">Geometria Plana</option>
-            <option value="operacoes_basicas">Operações Básicas</option>
-            <option value="fracoes">Frações</option>
-            <option value="porcentagens">Porcentagens</option>
-        </select>
+                <input type="file" placeholder="solucao" name="solucao" value="{{ pergunta.solucao.url }}" required><br>
 
-        <br>
-        <br>
-
-        <button type="submit">Salvar Edição</button>
-    </form>
-</body>
+                <label for="Categoria">Categoria:</label>
+                <select type="text" name="Categoria" value="{{ pergunta.categoria }}" required>>
+                    <option value="geometria_plana">Geometria Plana</option>
+                    <option value="operacoes_basicas">Operações Básicas</option>
+                    <option value="fracoes">Frações</option>
+                    <option value="porcentagens">Porcentagens</option>
+                </select>   
+                <button type="submit">Salvar Edição</button>
+            </form>
+        </div>
+    
+    </body>
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
 </html>

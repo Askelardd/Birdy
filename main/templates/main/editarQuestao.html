@@ -5,32 +5,42 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{% static "css/editarPerguntas.css" %}">
         <title>Editar Pergunta</title>
+        
     </head>
 
     <body>
+        <div class="container">
+            {% if questao %}
+            <div class="alinhado">
+                <h1 class="tituloCRUD">Editar Questão</h1>
+                <a class="seta" onclick="goBack()"><img src="{% static "assets/Seta_2.png" %}" class="arrow"></a>
+            </div>
+            <form class="popup-form" method="POST" action="{% url 'editar_questao' questao.id %}">
+                {% csrf_token %}
+            
+                <label for="topico">Tópico:</label>
+                <select name="topico" required>
+                    {% for topico in topicos %}
+                        <option value="{{ topico.id }}" {% if topico.id == questao.topico.id %}selected{% endif %}>{{ topico.nome }}</option>
+                    {% endfor %}
+                </select><br>
+    
+                <textarea placeholder="Pergunta" name="pergunta" required>{{ questao.pergunta }}</textarea><br>
+            
+                <button type="submit">Salvar Edições</button>
+            </form>
 
-        {% if questao %}
-        <h1>Editar Questão</h1>
-        <form method="POST" action="{% url 'editar_questao' questao.id %}">
-            {% csrf_token %}
-        
-            <label for="topico">Tópico:</label>
-            <select name="topico" required>
-                {% for topico in topicos %}
-                    <option value="{{ topico.id }}" {% if topico.id == questao.topico.id %}selected{% endif %}>{{ topico.nome }}</option>
-                {% endfor %}
-            </select><br>
-        
-            <label for="pergunta">Pergunta:</label>
-            <textarea name="pergunta" required>{{ questao.pergunta }}</textarea><br>
-        
-            <button type="submit">Salvar Edições</button>
-        </form>
-
-        {% else %}
-            <p>A questão não foi encontrada.</p>
-        {% endif %}
+            {% else %}
+                <p>A questão não foi encontrada.</p>
+            {% endif %}
+        </div>
 
     </body>
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+    </script>
 </html>
