@@ -1,8 +1,6 @@
 from functools import wraps
 import os
 import openai
-import gradio
-import gradio as gr
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth import authenticate, login
@@ -359,38 +357,22 @@ def deletar_resposta(request, resposta_id):
     resposta.delete()
     return redirect('detalhes_questao', questao_id=questao_id)
 
-
-
-
-openai.api_key = "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"
-
-messages = [{"role": "system", "content" : "You are a Matematic teacher"}]
-
-def CustomChatGPT(user_input):
-    messages.append({"role": "system", "content" : user_input})
-    response = openai.ChatCompletion.create(
-        model = "gpt-3.5-turbo",
-        messages = messages
-    )
-    ChatGPT_reply = response["choices"][0]["message"]["content"]
-    messages.append({"role": "system", "content" : ChatGPT_reply})
-    
-demo = gradio.Interface(fn=CustomChatGPT, inputs="text", outputs="text", title="Your Title")
+openai.api_key = ""
 
 def chat_view(request):
     if request.method == 'POST':
         user_input = request.POST['user_input']
-        chat_reply = CustomChatGPT(user_input)
-        return render(request, 'main/chatAPI.html', {'chat_reply': chat_reply})
+                
+        # Chama a API para gerar uma resposta
+        respostaIA = openai.Completion.create(
+            engine="text-davinci-003",
+            prompt=user_input,
+            temperature=0.5,
+            max_tokens=400
+        )
+                
+        # Extrai a resposta gerada
+        resposta = respostaIA.choices[0].text.strip().replace('"', '')
+
+        return render(request, 'main/chatAPI.html', {'chat_reply': resposta})
     return render(request, 'main/chatAPI.html')
-
-# gradio
-
-    demo = gr.Interface(fn=CustomChatGPT, inputs="text", outputs="text", live=True)
-
-def gradio_view(request):
-    if request.method == 'POST':
-        user_input = request.POST['user_input']
-        chat_reply = CustomChatGPT(user_input)
-        return HttpResponse(chat_reply)
-    return render(request, 'main/gradio.html', {"title": "Gradio Chat"})

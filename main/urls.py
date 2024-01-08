@@ -15,14 +15,13 @@ urlpatterns = [
     path('forum/', forum, name='forum'),
     path('chatAPI/', chat_view, name='chat_view'),
     path('chatAPI/', chatAPI, name='chat'),
-    path('gradio/', gradio_view, name='gradio'),
 
     path('cursos/', cursos, name='cursos'),
     path('perguntasMath/', perguntasMath, name='perguntasMath'),
     path('crudPerguntas/', crudPerguntas, name='crudPerguntas'),  
+    path('perguntas-math/<str:categoria>/', perguntasMath, name='perguntasMath'),
     path('crudQuestoes/', crudQuestoes, name='crudQuestoes'),  
     path('verificar_resposta/<int:pergunta_id>/', verificar_resposta, name='verificar_resposta'),
-    path('perguntas-math/<str:categoria>/', perguntasMath, name='perguntasMath'),
 
     
     path('crud_Perguntas/', criar_form_perg, name='crud_perguntas'),
