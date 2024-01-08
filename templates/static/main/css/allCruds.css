@@ -118,8 +118,14 @@ header a:hover{
     padding: -1;
 }
 
-.logo {
-    width: 110px;
+.logo{
+    cursor: pointer;
+    max-width: 85%;
+    max-height: 85%;
+    display: flex;
+    align-items: center;
+    padding: -1;
+    width: 200px;
 }
 
 .nav-links{

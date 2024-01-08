@@ -15,12 +15,16 @@
 <body>
 
    <header class="header">
-        <img src={% static "assets/logo.png" %} class="logo"></img>
+
+        <a href="{% url 'uc' %}"><img src="{% static 'assets/logo.png' %}" class="logo"></img></a>
+
         <nav class="header-navigation">
             <ul class="nav-links">
-                <li><a href="#">Cursos</a></li>
-                <li><a href="#">Fórum</a></li>
-                <li><a href="#">Contato</a></li>
+                <li class="nav"><a class="nav-text" href="{% url 'cursos' %}">Cursos</a></li>
+                <li class="nav"><a class="nav-text" href="{% url 'forum' %}">Forum</a></li>
+                <li class="nav"><a class="nav-text" href="{% url 'perfil' %}">Perfil</a></li>
+                <li class="nav"><a class="nav-text" href="{% url 'allCruds' %}">Cruds</a></li>
+                
             </ul>
         </nav>
         <form method="POST" action="{% url 'logout' %}">

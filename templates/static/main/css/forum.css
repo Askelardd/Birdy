@@ -433,3 +433,16 @@ button:hover{
     background: #333333 ;
     border-radius: 10px;
 }
+
+.birdyBut
+{
+    background-color: transparent;
+    cursor: pointer;
+    max-width: 200px;
+    max-height: 200px;
+    display: flex;
+    align-items: center;
+    padding: -1;
+    border-color: transparent;
+
+}

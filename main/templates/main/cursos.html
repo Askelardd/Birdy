@@ -14,17 +14,17 @@
 </head>
 <body>
     <header class="header">
-        <img src="{% static "assets/logo.png" %}" class="logo"></img>
+        <a href="{% url 'uc' %}"><img src="{% static 'assets/logo.png' %}" class="logo"></img></a>
         <nav class="header-navigation">
             <ul class="nav-links">
-                <li class="nav"><a class="nav-text" href="">Cursos</a></li>
-                <li class="nav"><a class="nav-text" href="">Forum</a></li>
-                <li class="nav"><a class="nav-text" href="">Perfil</a></li>
+                <li class="nav"><a class="nav-text" href="{% url 'cursos' %}">Cursos</a></li>
+                <li class="nav"><a class="nav-text" href="{% url 'forum' %}">Forum</a></li>
+                <li class="nav"><a class="nav-text" href="{% url 'perfil' %}">Perfil</a></li>
             </ul>
         </nav>
         <form method="POST" action="{% url 'logout' %}">
             {% csrf_token %}
-            <a type="submit" class="logout"><button>Logout</button></a>
+            <a type="submit"><button class="button-logOut">Logout</button></a>
         </form>
     </header>
 
@@ -66,26 +66,26 @@
                 <div class="wrapper1">
                     <div class="row">
                         <div class="col-md-6">
-                            <button class="btn" onclick="window.location='{% url 'perguntasMath' categoria='geometria_plana' %}'">
-                                <img src="{% static 'assets/Icone_Geometria_Plana.png' %}" class="forms ms-5" alt="Geometria Plana">
+                            <button class="button-cat" onclick="window.location='{% url 'perguntasMath' categoria='geometria_plana' %}'">
+                                <img  class="btnSize" src="{% static 'assets/Icone_Geometria_Plana.png' %}" class="forms ms-5" alt="Geometria Plana">
                             </button>
                         </div>
                         <div class="col-md-6">
-                            <button class="btn" onclick="window.location='{% url 'perguntasMath' categoria='operacoes_basicas' %}'">
-                                <img src="{% static 'assets/Icone_Operacoe_Basicas.png' %}" class="forms" alt="Operações Básicas">
+                            <button class="button-cat" onclick="window.location='{% url 'perguntasMath' categoria='operacoes_basicas' %}'">
+                                <img class="btnSize" src="{% static 'assets/Icone_Operacoe_Basicas.png' %}" class="forms" alt="Operações Básicas">
                             </button>
                         </div>
                     </div>
                     
                     <div class="row mt-3">
                         <div class="col-md-6">
-                            <button class="btn" onclick="window.location='{% url 'perguntasMath' categoria='fracoes' %}'">
-                                <img src="{% static 'assets/Icones_Fracoes.png' %}" class="forms ms-5" alt="Frações">
+                            <button class="button-cat" onclick="window.location='{% url 'perguntasMath' categoria='fracoes' %}'">
+                                <img class="btnSize" src="{% static 'assets/Icones_Fracoes.png' %}" class="forms ms-5" alt="Frações">
                             </button>
                         </div>
                         <div class="col-md-6">
-                            <button class="btn" onclick="window.location='{% url 'perguntasMath' categoria='porcentagens' %}'">
-                                <img src="{% static 'assets/Icones_Porcentagem.png' %}" class="forms" alt="Porcentagens">
+                            <button class="button-cat" onclick="window.location='{% url 'perguntasMath' categoria='porcentagens' %}'">
+                                <img class="btnSize" src="{% static 'assets/Icones_Porcentagem.png' %}" class="forms" alt="Porcentagens">
                             </button>
                         </div>
                     </div>

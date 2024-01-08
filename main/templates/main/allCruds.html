@@ -14,12 +14,12 @@
 <body>
     <div class="cont" id="blur">
         <header class="header">
-            <a href="index.html"><img src="{% static "assets/logo.png" %}" class="logo"></img></a>
+            <a href="{% url 'uc' %}"><img src="{% static 'assets/logo.png' %}" class="logo"></img></a>
             <nav class="header-navigation">
                 <ul class="nav-links">
-                    <li><a href="uc.html">Cursos</a></li>
-                    <li><a href="forum.html">Fórum</a></li>
-                    <li><a href="perfil.html">Perfil</a></li>
+                    <li class="nav"><a class="nav-text" href="{% url 'cursos' %}">Cursos</a></li>
+                    <li class="nav"><a class="nav-text" href="{% url 'forum' %}">Forum</a></li>
+                    <li class="nav"><a class="nav-text" href="{% url 'perfil' %}">Perfil</a></li>
                 </ul>
             </nav>
             <form method="POST" action="{% url 'logout' %}">

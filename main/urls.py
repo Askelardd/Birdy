@@ -11,7 +11,12 @@ urlpatterns = [
     path('logout/', logout_view, name='logout'),
     path('perfil/', perfil, name='perfil'),
     path('uc/', uc, name='uc'),  
+    path('pageError/', pageError, name='pageError'),
     path('forum/', forum, name='forum'),
+    path('chatAPI/', chat_view, name='chat_view'),
+    path('chatAPI/', chatAPI, name='chat'),
+    path('gradio/', gradio_view, name='gradio'),
+
     path('cursos/', cursos, name='cursos'),
     path('perguntasMath/', perguntasMath, name='perguntasMath'),
     path('crudPerguntas/', crudPerguntas, name='crudPerguntas'),  
@@ -39,9 +44,6 @@ urlpatterns = [
     
     
     path('allCruds/', allCruds, name='allCruds'),
-    
-    
-
     
     
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

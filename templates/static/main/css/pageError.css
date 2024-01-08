@@ -1,0 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Ubuntu:wght@300;400;500;700&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+   font-family: 'Montserrat',  sans-serif;
+
+}
+
+body{
+    background-color: #f84a4a;
+    background: linear-gradient(to right,#b14747,  #f84a4a);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.container
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin-top: 60px;
+    
+}
+
+.img-fluid
+{
+    width: 500px;
+    height: 500px;
+}

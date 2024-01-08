@@ -3,7 +3,97 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Montserrat',  sans-serif;
+}
 
+/* Nav-Bar */
+
+li,a{
+    font-family: "Montserrat", sans-serif;
+    font-weight: 700;
+    text-decoration: none;
+    font-size: 25px;
+    color: #f84a4a;
+}
+
+.header{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    height: 20%;
+    padding: 0px 10%;
+    background-color: #ffffff;
+}
+
+.header-navigation{
+    display: flex;
+    align-items: center;
+}
+.header-navigation a{
+    text-decoration: none;
+    width: 50%;
+    font-weight: bold;
+    font-size: 30px;
+    color: #f84a4a;
+}
+
+header a:hover{
+    transition: all 0.4s ease 0s;
+    color: #f99393;
+}
+
+.logout{
+    padding: 9px 25px;
+    cursor: pointer;
+    background-color:#f84a4a;
+    color: #ffffff;
+    border: none;
+    border-radius: 40px;
+    transition: all 0.4s ease 0s;
+}
+
+.logout:hover{
+    background-color: #D63737;
+    transition: all 0.4s ease 0s;
+}
+
+.header-img{
+    max-width: 40%;
+    max-height: 40%;
+    display: flex;
+    align-items: center;
+    padding: -1;
+}
+
+.logo {
+    width: 110px;
+}
+
+.nav-links{
+    list-style: none;
+}
+
+.nav-links li{
+    display: inline-block;
+    padding: 0px 50px;
+}
+
+.nav-links li a{
+    transition: all 0.3 ease 0s;
+}
+
+.nav-links li a:hover{
+    transition: all 0.4s ease 0s;
+    color:#f99393;
+}
+
+.logout-button{
+    padding: 9px 25px;
+    cursor: pointer;
+    background-color:#f84a4a;
+    color: #ffffff;
+    border: none;
+    border-radius: 80px;
 }
 
 .button{
@@ -14,7 +104,6 @@
     font-size: 20px;
     color: white;
     font-weight: 700;
-    box-shadow: 0 8px 0 #D63737;
 }
 
 .button:active{
@@ -63,7 +152,6 @@ button{
     font-size: 25px;
     color: white;
     font-weight: 700;
-    box-shadow: 0 8px 0 #D63737;
     height: 62.5px;
 }
 
@@ -97,11 +185,6 @@ button{
      text-decoration: none;
  }
  
- .crud-img{
-     width: 300px;
- 
- }
-
  .button{
     background-color: #f84a4a;
     margin: 20px;
@@ -155,7 +238,7 @@ button{
     flex-direction: column;
 }
 
-.cont.active#blur{
+.cont.active .blur{
    filter: blur(10px);
    pointer-events: none;
    user-select: none;
@@ -184,7 +267,8 @@ button{
 
 .popup{
     display: flex;
-    flex-direction: column;
+    flex-direction: column; 
+    z-index: 100;
 }
 
 .popup-img{
@@ -197,4 +281,39 @@ button{
         width: 80%;
         margin: 5%;
     }
+}
+
+.opcoes-resposta {
+    display: flex;
+    flex-direction: column; /* Coloca os grupos um embaixo do outro */
+}
+
+.grupo-opcoes {
+    display: flex;
+    justify-content: space-around; /* Distribui os botões horizontalmente */
+    margin-bottom: 10px; /* Espaço entre os grupos (opcional) */
+}
+
+.respostaButton
+{
+    background-color: #f84a4a;
+    border-radius: 20px;
+    border: none;
+    padding: 16px 20px;
+    font-size: 20px;
+    color: white;
+    font-weight: 700;
+    box-shadow: 0 8px 0 #D63737;
+}
+
+.respostaButton:active
+{
+    box-shadow: none;
+    transform: translateY(8px);
+}
+
+.crud-img2
+{
+    width: 450px;
+    height: 250px;
 }

@@ -1,0 +1,27 @@
+{% load static %}
+
+<!--Error 404 page named : pageError-->
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+        <link rel="stylesheet" href="{% static "css/pageError.css" %}">
+        <link rel="icon" href="{% static 'assets/Passaro_Birdy.png' %}" type="image/x-icon">    
+        <title>Birdy!</title>
+    </head>
+
+    <body>
+        <div class="container">
+            <h1>Error 404</h1>
+            <img src="{% static 'assets/Birdy.png' %}" class="img-fluid" id="min">
+            <p>Olá, parece que estas perdido</p>
+            <p>Esta Pagina não foi encontrada ou não tens permissões para aceder</p>
+            <a href="{% url 'uc' %}">Clique aqui para voltar a Pagina principal</a>
+        </div>
+            
+    </body>
+
+</html>

@@ -1,0 +1,21 @@
+<!-- chatAPI.html -->
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chat with ChatGPT</title>
+</head>
+<body>
+    <h1>Chat with ChatGPT</h1>
+    <form method="POST" action="{% url 'chat_view' %}">
+        {% csrf_token %}
+        <label for="user_input">Enter your message:</label>
+        <input type="text" name="user_input" required>
+        <button type="submit">Submit</button>
+    </form>
+    {% if chat_reply %}
+        <p>ChatGPT's reply: {{ chat_reply }}</p>
+    {% endif %}
+</body>
+</html>

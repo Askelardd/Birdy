@@ -1,6 +1,9 @@
 from functools import wraps
 import os
-from django.http import HttpResponse, HttpResponseForbidden, HttpResponseRedirect, JsonResponse
+import openai
+import gradio
+import gradio as gr
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
@@ -15,17 +18,29 @@ from django.contrib.auth.decorators import user_passes_test
 
  # renderizacao das paginas
  
+def is_professor(user):
+    return user.is_authenticated and user.perfil.tipo_usuario in ['professor', 'admin'] 
+ 
 def index(request):
     return render(request, 'main\index.html')
 
+def chatAPI(request):
+    return render(request, 'main/chatAPI.html')
+
 def cursos(request):
     return render(request, 'main/cursos.html') 
+
+def pageError(request, exception=None):
+    
+    print("View de erro 404 chamada")
+    return render(request, 'main/pageError.html', status=404)
+
 
 def perfil(request):
     perfil = Perfil.objects.get(user=request.user)
     return render(request, 'main/perfil.html', {'perfil': perfil})
 
-    
+
 def crudRespostas(request):
     questoes = Questao.objects.all()
     return render(request, 'main/crudRespostas.html', {'questoes': questoes})
@@ -37,6 +52,8 @@ def editarPerguntas(request):
 def editarQuestao(request):
     return render(request, 'main\editarQuestao.html')
 
+
+@user_passes_test(is_professor, login_url='index')#criar pagina de acesso negado
 
 def allCruds(request):
     questoes = Questao.objects.all()
@@ -58,9 +75,6 @@ def crudQuestoes(request):
     questoes = Questao.objects.all()
     topicos = Topico.objects.all()
     return render(request, 'main/crudQuestoes.html', {'questoes': questoes, 'topicos': topicos})
-
-def is_professor(user):
-    return user.is_authenticated and user.perfil.tipo_usuario in ['professor', 'admin']
 
 
 @user_passes_test(is_professor, login_url='index')#criar pagina de acesso negado
@@ -162,18 +176,13 @@ def verificar_resposta(request, pergunta_id):
             
     else:
         resposta = "Resposta errada."
-        # Limpar a sessão se a resposta estiver errada
-        request.session.clear()
-
+        
     # Retorna a resposta
     if resposta == (""):
-        return HttpResponse("Vazio")
+        return HttpResponse("Resposta Correta")
     
     return HttpResponse(resposta)
 
-    
-        
-    
 
 def criar_form_perg(request):
     
@@ -349,3 +358,39 @@ def deletar_resposta(request, resposta_id):
     questao_id = resposta.questao.id
     resposta.delete()
     return redirect('detalhes_questao', questao_id=questao_id)
+
+
+
+
+openai.api_key = "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"
+
+messages = [{"role": "system", "content" : "You are a Matematic teacher"}]
+
+def CustomChatGPT(user_input):
+    messages.append({"role": "system", "content" : user_input})
+    response = openai.ChatCompletion.create(
+        model = "gpt-3.5-turbo",
+        messages = messages
+    )
+    ChatGPT_reply = response["choices"][0]["message"]["content"]
+    messages.append({"role": "system", "content" : ChatGPT_reply})
+    
+demo = gradio.Interface(fn=CustomChatGPT, inputs="text", outputs="text", title="Your Title")
+
+def chat_view(request):
+    if request.method == 'POST':
+        user_input = request.POST['user_input']
+        chat_reply = CustomChatGPT(user_input)
+        return render(request, 'main/chatAPI.html', {'chat_reply': chat_reply})
+    return render(request, 'main/chatAPI.html')
+
+# gradio
+
+    demo = gr.Interface(fn=CustomChatGPT, inputs="text", outputs="text", live=True)
+
+def gradio_view(request):
+    if request.method == 'POST':
+        user_input = request.POST['user_input']
+        chat_reply = CustomChatGPT(user_input)
+        return HttpResponse(chat_reply)
+    return render(request, 'main/gradio.html', {"title": "Gradio Chat"})

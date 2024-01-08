@@ -13,7 +13,6 @@ body{
     background: linear-gradient(to right,#f6d2d2,  #f99393);
     display: flex;
     align-items: center;
-    /*justify-content: center;*/
     flex-direction: column;
     height: 100vh;
 }
@@ -34,7 +33,7 @@ li,a{
     display: flex;
     align-items: center;
     padding: -1;
-
+    width: 100px;
 }
 
 .nav-links{
