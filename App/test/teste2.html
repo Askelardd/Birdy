@@ -10,111 +10,39 @@
     <link rel="icon" href="assets/Passaro_Birdy.png" type="image/x-icon">
 </head>
 <body>
-    <div class="cont" id="blur">
-        <header class="header">
-                <a href="index.html"><img src="/assets/logo.png" class="logo"></img></a>
-            <nav class="header-navigation">
-                <ul class="nav-links">
-                    <li><a href="uc.html">Cursos</a></li>
-                    <li><a href="forum.html">Fórum</a></li>
-                    <li><a href="perfil.html">Perfil</a></li>
-                </ul>
-            </nav>
-            <a href="login.html"><button class="logout">Logout</button></a>
-        </header>
-  
-        <div class="wrapper">
-            <div class="search-bar"> 
-                    <input type="search" placeholder="Pesquisar"class="search-text"></i><!--<i class="fa-solid fa-magnifying-glass">--></i></input>
-                    <a href="#" onclick="toggle()" class="ask-button">PERGUNTAR</a> 
-            </div>
-                
-            <div class="post">
-                <h2 class="post-title">Preciso de ajuda com equação de primeiro grau.</h2>
-                <p class="post-username">pergunta por @Aluno_Nsei</p>
-            </div>
-            
-            <div class="comment">
-                <li>
-                    <div class="user-comments"> 
-                        <div class="username">
-                            <img src="../assets/Default_User.png" class="user-img">
-                            <h2>Lucas_Alfa</h2>
-                            <h4 class="user-tag">PROFESSOR</h4>
-                        </div>
-
-                        <h5 class="user-text">Isso é simples temos Lorem ipsum dolor sit amet, consectetur 
-                            adipiscing elit, sed do eiusmod tempor incididunt ut labore 
-                            et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud </h5>
-                    </div>
-                </li>
-
-                <li>
-                    <div class="user-comments"> 
-                        <div class="username">
-                            <img src="../assets/Default_User.png" class="user-img">
-                            <h2>Bela_Sepulcri2002</h2>
-                        </div>
-
-                        <h5 class="user-text">Isso é simples temos Lorem ipsum dolor sit amet, consectetur 
-                            adipiscing elit, sed do eiusmod tempor incididunt ut labore 
-                            et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud </h5>
-                    </div>
-                </li>
-
-                <li>
-                    <div class="user-comments"> 
-                        <div class="username">
-                            <img src="../assets/Default_User.png" class="user-img">
-                            <h2>Polter-Gueist157</h2>
-                        </div>
-
-                        <h5 class="user-text">Isso é simples temos Lorem ipsum dolor sit amet, consectetur 
-                            adipiscing elit, sed do eiusmod tempor incididunt ut labore 
-                            et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud </h5>
-                    </div>
-                </li>
-
-            </div>
-        
-                <div class="comment-bar">
-                    <input type="search" placeholder="Comentar"class="comment-text"></i><!--<i class="fa-solid fa-magnifying-glass">--></i></input>
-                    <a href="#"><img src="/assets/Send.png" class="send"></img></a>   
-                </div>
-
-        </div>
-    </div>
-
     
-        <div class="popup" id="popup">
-            <form  class="popup-form" method="POST" action="{% url 'criar_questao' %}">
-                <!-- {% csrf_token %} -->
-                <div class="options">
-                    <p>Qual o Curso?</p>
-                    <a onclick="toggle()"><img src="{% static 'assets/Seta_2.png' %}" class="arrow"></a>
-                </div>
-                <div class="topic">
-                    <label for="topico">Tópico:</label>
-                    <select name="topico" required>
-                    {% for topico in topicos %}
-                        <option class="topicos" value="{{ topico.id }}">{{ topico.nome }}</option>
-                    {% endfor %}
-                    </select>
-                </div>
-                <textarea placeholder="Digite sua dúvida aqui" rows="5" name="pergunta" required></textarea><br>
-                
-            
-                <button type="submit">Adicionar Questão</button>
-            </form>
+    <nav class="sidebar">
+        <header>
+            <h2>Neca de Pitibiriba</h2>
+        </header>
+        <div class="scrollbox">
+            <div class="scrollbox-inner">
+                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sequi itaque animi ea ab, nam delectus fugit beatae voluptatibus sapiente enim officia numquam architecto voluptates provident vero eligendi saepe quisquam explicabo.
+                Minima, enim consequuntur. Maxime veritatis magnam minima, placeat temporibus accusamus ipsa eligendi ad voluptatem eius tempora, quasi nulla, voluptates excepturi dolor eum quae? Est odit, veniam perferendis iste a totam!
+                Voluptatibus iusto iste, blanditiis consectetur a quisquam ea aliquam at itaque tempore tempora, vitae rem, voluptatem eum delectus adipisci perferendis. Et, vero? Repudiandae, totam asperiores ea iure cupiditate deserunt sequi?
+                Recusandae ratione quisquam nostrum quidem! Dolorum esse est aut id perspiciatis praesentium quidem sunt quod quibusdam, illo sit recusandae eius quos reprehenderit aspernatur iste modi accusamus quae iusto facere dignissimos!
+                Officiis ad officia nisi saepe facilis, itaque est eum non mollitia sequi consectetur ea laudantium nesciunt repellendus corrupti exercitationem voluptates in inventore aspernatur cumque iusto doloremque necessitatibus ut? Voluptatibus, quae?
+                Ex excepturi in id neque modi delectus veritatis earum, non dignissimos porro voluptates nam, repellendus incidunt minima maiores inventore quos ipsum harum aut iste perspiciatis suscipit. Iusto ducimus commodi porro.
+                Quidem in a non amet, repellendus quis fuga. Facilis, impedit explicabo, at consectetur provident temporibus nihil aliquam nobis odit modi quasi ipsum doloribus fuga dolore esse aperiam possimus laboriosam harum.
+                Optio deserunt voluptate quidem at obcaecati maxime ipsa iure sapiente id est, doloribus molestias, atque ut debitis nam vero aliquam aliquid quis dolore eligendi assumenda quo cupiditate tenetur voluptatum. Voluptatum!
+                Consequatur sequi labore quas nesciunt aliquam non quidem commodi, possimus minus ducimus ex et corporis quia vitae accusantium dolorem enim laborum dolores voluptatum architecto a laudantium recusandae doloremque. Sint, molestiae.
+                Sed expedita hic beatae aspernatur, perspiciatis aliquid. Ut ea porro corporis molestiae perferendis nobis dolore voluptatibus laboriosam consequuntur, temporibus nostrum distinctio laborum dolor minus nisi accusantium odio doloremque. Error, repellendus.
+                Amet similique ipsum blanditiis odit facilis tempore temporibus earum cupiditate! Ad harum ipsa consequatur corrupti mollitia expedita perspiciatis magnam aliquam architecto dolore, tempora voluptates officia doloribus consequuntur commodi? Sed, dolore.
+                Dignissimos recusandae et quasi consectetur perferendis sint, tempore doloribus placeat laudantium dolorum dolore in ut possimus consequatur quam enim iure odio quidem? Incidunt eaque soluta, illo beatae itaque perferendis suscipit.
+                Deleniti est provident ipsum debitis veniam accusamus quas cumque laboriosam atque sit quisquam qui, excepturi similique nihil ut aut, recusandae labore quidem minima id? Explicabo aspernatur exercitationem consequuntur corrupti porro.
+                Vitae ad a dignissimos nulla alias earum dolorum consequuntur nisi fugiat, illo minima laudantium exercitationem veniam ea molestiae! Deleniti consequatur tenetur velit cumque ex dicta dolore ad minus aut nemo?
+                Voluptate ipsum commodi atque error reiciendis repudiandae placeat nisi molestiae est neque, ex maxime. Quisquam, exercitationem soluta magni temporibus reiciendis deserunt commodi debitis quibusdam labore autem consequatur cum unde! Dicta.
+                Natus dolores qui aspernatur commodi iste! Molestiae culpa quisquam soluta hic, provident ad maxime possimus ab cum corrupti consequuntur dicta, quaerat voluptates consectetur debitis sint dignissimos! Tempora libero amet tempore.
+                Mollitia, quisquam. Quod quidem porro error unde mollitia. Reiciendis cum commodi velit a! Eligendi, dolore mollitia. Accusamus quisquam voluptatum aliquam rem consequuntur, laborum esse odit ad ratione corrupti nisi provident.
+                Nesciunt ex dignissimos quasi consequatur! Porro quasi a earum consequatur tenetur quisquam atque, eaque iste deleniti suscipit, alias sunt ad optio ipsa veritatis similique nulla voluptas quae assumenda eveniet. Quaerat.
+                Ea, impedit. Perferendis, ipsam perspiciatis modi eligendi dolores rem quia ducimus delectus? Alias doloribus fugit enim aliquam modi dolorum esse aliquid laudantium repudiandae! Explicabo deserunt, voluptatum porro excepturi assumenda non!
+                Earum amet perferendis optio dignissimos similique. Blanditiis cupiditate nostrum sunt nisi sequi, animi doloribus ullam aperiam iure quam, ad voluptas. Nam qui reiciendis assumenda suscipit eos modi culpa expedita laudantium?</p>
+            </div>
         </div>
+        <footer>
+            <h2>pézinho</h2>
+        </footer>
+    </nav>
 
 </body>
-<script type="text/javascript">
-    function toggle(){
-        var blur = document.getElementById('blur');
-        blur.classList.toggle('active')
-        var popup = document.getElementById('popup');
-        popup.classList.toggle('active')
-    }
-</script>
 </html>
