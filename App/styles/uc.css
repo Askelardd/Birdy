@@ -64,6 +64,7 @@ p{
     color: white;
     font-weight: 700;
     transition: all 0.4s ease 0s;
+    text-decoration: none;
 }
 
 .math-button:hover{
@@ -86,6 +87,7 @@ p{
     color: white;
     font-weight: 700;
     transition: all 0.4s ease 0s;
+    text-decoration: none;
 }
 
 .prog-button:hover{
